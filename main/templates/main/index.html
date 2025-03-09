@@ -1,0 +1,57 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ "I'm Matt - Home" }}{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a href="#" class="top-button"><i class="fab fa-github"></i></a>
+        <a href="#" class="top-button"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <div class="hero-section">
+        <div>
+            <p class="hero-greeting">Nice to meet you,</p>
+            <object type="image/svg+xml" data="{% static 'main/imgs/hero-name.svg' %}"></object>
+        </div>
+    </div>
+    <nav class="nav-buttons">
+        <ul>
+            <li class="nav-button"><a href="#">Resumé</a></li>
+            <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
+        </ul>
+    </nav>
+    <section class="skills-section">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in skills %}
+                <li>
+                    <a class="skill-item" href="#">
+                        <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
+                        <p>{{ skill.title }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="experience-section">
+        <h2>Experience</h2>
+        <ul>
+            {% for experience in experiences %}
+                <li>
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <p class="experience-title">{{ experience.title }}</p>
+                                <p class="experience-company">{{ experience.company }}</p>
+                            </div>
+                            <p class="experience-dates">{{ experience.start_date|date:"M Y" }} - {{ experience.end_date|date:"M Y" }}</p>
+                        </div>
+                        <div class="experience-body">
+                            <p>{{ experience.description_dotted_list|linebreaks }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

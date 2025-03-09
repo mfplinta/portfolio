@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'main/style.css' %}">
+        <link rel="stylesheet" href="{% static 'main/fonts/fa/css/fontawesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'main/fonts/fa/css/brands.min.css' %}">
+        <link rel="stylesheet" href="{% static 'main/fonts/fa/css/solid.min.css' %}">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
