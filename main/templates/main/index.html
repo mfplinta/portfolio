@@ -1,34 +1,40 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %}{{ "I'm Matt - Home" }}{% endblock %}
+{% block title %}{{ "Home" }}{% endblock %}
 
 {% block content %}
-    <div class="top-buttons">
-        <a href="#" class="top-button"><i class="fab fa-github"></i></a>
-        <a href="#" class="top-button"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-    <div class="hero-section">
-        <div>
-            <p class="hero-greeting">Nice to meet you,</p>
-            <object type="image/svg+xml" data="{% static 'main/imgs/hero-name.svg' %}"></object>
-        </div>
-    </div>
-    <nav class="nav-buttons">
-        <ul>
-            <li class="nav-button"><a href="#">Resumé</a></li>
-            <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
-        </ul>
-    </nav>
+    {% include 'main/header.html' with hero_section=True %}
     <section class="skills-section">
         <h2>Skills</h2>
         <ul>
             {% for skill in skills %}
                 <li>
-                    <a class="skill-item" href="#">
+                    <a class="skill-item" {% if skill.tag %}href="{% url 'projects-withtag' skill.tag.tag %}"{% endif %}>
                         <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
                         <p>{{ skill.title }}</p>
                     </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="education-section">
+        <h2>Education</h2>
+        <ul>
+            {% for education_item in education %}
+                <li>
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <p class="education-title">{{ education_item.degree }}</p>
+                                <p class="education-school">{{ education_item.institution }}</p>
+                            </div>
+                            <p class="education-dates">{{ education_item.start_date|date:"M Y" }} - {{ education_item.end_date|date:"M Y" }}</p>
+                        </div>
+                        <div class="education-body">
+                            <p>{{ education_item.description_dotted_list|linebreaks }}</p>
+                        </div>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

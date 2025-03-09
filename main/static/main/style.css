@@ -14,13 +14,12 @@
 /* Main */
 .content {
     padding: 30px 50px;
-    text-align: center;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
         "hero hero hero hero hero hero"
         ". . nav nav . ."
-        "skills skills skills experience experience experience";
+        "skills skills experience experience education education";
     justify-items: center;
     row-gap: 30px;
     grid-gap: 50px;
@@ -47,11 +46,12 @@ a {
 }
 
 .top-buttons {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
     display: flex;
     gap: 10px;
+    z-index: 1001;
 }
 .top-button {
     background: #000;
@@ -72,6 +72,17 @@ a {
 
 .hero-section {
     grid-area: hero;
+    transition: font-size 0.1s ease;
+}
+
+.hero-section.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 10px 20px;
+    z-index: 1000;
 }
 
 .hero-section div {
@@ -82,13 +93,29 @@ a {
     margin-top: 80px;
 }
 
+.hero-section.scrolled div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+}
+
 .hero-greeting {
     color: #444;
     padding-bottom: 10px;
 }
+
+.hero-section.scrolled .hero-greeting {
+    display: none;
+}
+
 .hero-name {
-    font-weight: bold;
-    font-size: 4.5rem;
+    height: 4rem;
+}
+
+.hero-name.small {
+    height: 2.5rem;
 }
 
 .nav-buttons {
@@ -129,7 +156,7 @@ a {
 .skills-section {
     grid-area: skills;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .skills-section ul {
@@ -143,6 +170,7 @@ a {
     display: flex;
     align-items: center;
     border: 1px solid #000;
+    color: #333;
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
@@ -171,7 +199,7 @@ a {
 
 .experience-section {
     grid-area: experience;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .experience-section h2 {
@@ -212,16 +240,77 @@ a {
     align-self: flex-start;
 }
 .experience-body {
+    color: #333;
     padding: 10px;
 }
 
-@media (max-width: 900px) {
+.education-section {
+    grid-area: education;
+    width: 100%;
+    max-width: 500px;
+}
+
+.education-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.education-section h2 {
+    padding-top: 10px;
+}
+
+.education-item {
+    text-align: left;
+    margin-top: 20px;
+    border: 1px solid #000;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.education-header {
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.education-header div {
+    display: flex;
+    flex-direction: column;
+}
+
+.education-title {
+
+}
+
+.education-school {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.education-dates {
+    margin-left: auto;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+.education-body {
+    padding: 10px;
+    color: #333;
+}
+
+@media (max-width: 1000px) {
     .content {
+        padding: 30px 10px;
         grid-template-columns: 1fr;
         grid-template-areas:
         "hero"
         "nav"
         "skills"
+        "education"
         "experience";
     }
 }

@@ -1,0 +1,58 @@
+{% load static %}
+
+{% if hero_section %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var heroSection = document.querySelector('.hero-section');
+      var heroName = document.querySelector('.hero-name');
+
+      function checkScroll() {
+        var scrollAmount = window.scrollY;
+
+        if (scrollAmount > 90) {
+          heroSection.classList.add('scrolled');
+          var newFontSize = Math.max(2.5, 4 - (scrollAmount / 200));
+          heroName.style.height = newFontSize + 'rem';
+        } else {
+          heroSection.classList.remove('scrolled');
+          heroName.style.height = '4rem';
+        }
+      }
+
+      function updateScrollListener() {
+        if (document.documentElement.scrollHeight > window.innerHeight + 290) {
+          window.addEventListener('scroll', checkScroll);
+        } else {
+          window.removeEventListener('scroll', checkScroll);
+        }
+      }
+
+      window.addEventListener('resize', updateScrollListener);
+      updateScrollListener();
+    });
+    </script>
+{% endif %}
+
+<div class="top-buttons">
+    <a href="#" class="top-button"><i class="fab fa-github"></i></a>
+    <a href="#" class="top-button"><i class="fab fa-linkedin-in"></i></a>
+</div>
+<div class="hero-section{% if not hero_section %} scrolled{% endif %}">
+    <div>
+        {% if hero_section %}
+            <p class="hero-greeting">Nice to meet you,</p>
+            {% include 'main/name.html' with classes="hero-name" animate=True %}
+        {% else %}
+            {% include 'main/name.html' with classes="hero-name small" %}
+        {% endif %}
+
+    </div>
+</div>
+{% if hero_section %}
+    <nav class="nav-buttons">
+        <ul>
+            <li class="nav-button"><a href="#">Résumé</a></li>
+            <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
+        </ul>
+    </nav>
+{% endif %}
