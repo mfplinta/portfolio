@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.models import Skill, Experience, Education
+from main.models import Skill, Experience, Education, Project
 
 
 def index(request):
@@ -12,5 +12,5 @@ def index(request):
 
 def projects(request, tag=None):
     return render(request, 'main/projects.html', {
-
+        'projects': Project.objects.all()
     })

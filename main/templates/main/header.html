@@ -7,11 +7,11 @@
         const content = document.querySelector('.content');
         const navButtons = document.querySelector('.nav-buttons');
 
-        if(content !== null) {
-            content.style.paddingTop = '300' + 'px';
-        }
-
         function styleHeader(fixed = false) {
+            if(content !== null) {
+                content.style.paddingTop = (fixed ? 80{% if title %} + 60{% endif %} : 300) + 'px';
+            }
+
             if(fixed) {
                 heroGreeting.style.display = 'none';
                 heroName.style.top = '10px';
@@ -47,7 +47,7 @@
             styleHeader();
         });
 
-        styleHeader({% if not hero_section %}true{% endif %});
+        styleHeader({% if not main_page %}true{% endif %});
     });
 </script>
 <header>
@@ -58,7 +58,7 @@
     <div class="hero-section">
         <div>
             <p class="hero-greeting">Nice to meet you,</p>
-            {% if hero_section %}
+            {% if main_page %}
                 {% include 'main/name.html' with classes="hero-name" animate=True %}
             {% else %}
                 {% include 'main/name.html' with classes="hero-name" %}
@@ -72,4 +72,10 @@
             <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
         </ul>
     </nav>
+    {% if title %}
+        <div class="nav-title">
+            <a href="{{ back_to }}" class="back-link">&lt; Back</a>
+            <span class="header-title">{{ title }}</span>
+        </div>
+    {% endif %}
 </header>

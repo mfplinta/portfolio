@@ -24,7 +24,7 @@
     grid-gap: 50px;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, span {
     font-family: 'Inter', sans-serif;
 }
 
@@ -134,6 +134,32 @@ header {
 .nav-button a:hover {
     color: #000;
     background: #fff;
+}
+
+.nav-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.back-link {
+    font-size: 1em;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    color: #000;
+}
+
+.header-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #333;
 }
 
 .top-button {
@@ -287,6 +313,64 @@ header {
 .education-body {
     padding: 10px;
     color: #333;
+}
+
+.project-image {
+    background-color: #E3E3E3;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.project-item {
+    border: 1px solid #000;
+    border-radius: 15px;
+    width: 300px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.project-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.project-title {
+    font-size: 1.25em;
+}
+
+.project-year {
+    font-size: 0.95em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.project-body {
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+.project-tags {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 100%;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.project-tag {
+    background-color: #000;
+    padding: 0 10px;
+    border-radius: 15px;
+}
+
+.project-tag a {
+    color: #fff;
+    font-size: 0.8em;
 }
 
 @media (max-width: 1000px) {
