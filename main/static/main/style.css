@@ -381,3 +381,21 @@ header {
         padding: 30px 10px;
     }
 }
+
+@media (hover: none) {
+    .top-button:hover,
+    .nav-button a:hover,
+    .skill-item:hover,
+    .skill-icon:hover {
+        background: initial;
+        color: initial;
+    }
+
+    .top-button:active,
+    .nav-button a:active,
+    .skill-item:active,
+    .skill-icon:active {
+        background: #000;
+        color: #fff;
+    }
+}
