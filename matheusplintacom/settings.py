@@ -125,7 +125,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ["matheusplinta.com", "www.matheusplinta.com"]
+ALLOWED_HOSTS = ["localhost", "matheusplinta.com", "www.matheusplinta.com"]
 CSRF_TRUSTED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
 CSRF_ALLOWED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
 CORS_ORIGINS_WHITELIST = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
