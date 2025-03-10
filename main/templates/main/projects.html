@@ -9,7 +9,7 @@
         <section class="projects-section">
             {% for project in projects %}
                 <div class="project-item">
-                    <a href="{% if project.git_url %}{{ project.git_url }}{% else %}#{% endif %}" class="fill-div"></a>
+                    {% if project.git_url %}<a href="{{ project.git_url }}" class="fill-div"></a>{% endif %}
                     <div class="project-header">
                         <p class="project-title">{{ project.title }}</p>
                         <p class="project-year">{{ project.date|date:"Y" }}</p>
