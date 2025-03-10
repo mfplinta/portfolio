@@ -1,13 +1,14 @@
 from django.shortcuts import render
+from django.db.models import F
 
 from main.models import Skill, Experience, Education, Project
 
 
 def index(request):
     return render(request, 'main/index.html', {
-        'skills': Skill.objects.all(),
-        'education': Education.objects.all(),
-        'experiences': Experience.objects.all(),
+        'skills': Skill.objects.all().order_by(F('title').asc()),
+        'education': Education.objects.all().order_by(F('end_date').desc(nulls_first=True)),
+        'experiences': Experience.objects.all().order_by(F('end_date').desc(nulls_first=True)),
     })
 
 def projects(request, tag=None):
