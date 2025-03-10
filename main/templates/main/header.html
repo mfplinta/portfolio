@@ -15,8 +15,8 @@
             if(fixed) {
                 heroGreeting.style.display = 'none';
                 heroName.style.top = '10px';
-                heroName.style.left = '2%';
-                heroName.style.transform = 'translate(-2%, 0)';
+                heroName.style.left = '10px';
+                heroName.style.transform = `translate(0, 0)`;
                 heroName.style.height = '2.5rem';
                 navButtons.style.display = 'none';
                 return;
@@ -31,8 +31,15 @@
             }
             heroGreeting.style.top = `${Math.max(10, 80 - scrollY)}px`;
             heroName.style.top = `${120 - Math.min(110, Math.max(0, scrollY))}px`;
-            heroName.style.left = `${50 - Math.min(46, scrollY)}%`;
-            heroName.style.transform = `translate(-${50 - Math.min(46, scrollY)}%, 0)`;
+            const leftPercentage = 50 - Math.min(46, scrollY);
+            console.log(leftPercentage)
+            if(leftPercentage > 5) {
+                heroName.style.left = `${leftPercentage}%`;
+                heroName.style.transform = `translate(-${50 - Math.min(46, scrollY)}%, 0)`;
+            } else {
+                heroName.style.left = '10px';
+                heroName.style.transform = `translate(0, 0)`;
+            }
             heroName.style.height = `${4.5 - Math.min(2, scrollY / 50)}rem`;
             navButtons.style.top = `${Math.max(10, 220 - scrollY)}px`;
             const navButtonsOpacity = Math.max(0, 2 - Math.max(1, scrollY / 100));
@@ -43,9 +50,12 @@
                 navButtons.style.display = 'none';
             }
         }
+
+        {% if main_page %}
         window.addEventListener('scroll', () => {
             styleHeader();
         });
+        {% endif %}
 
         styleHeader({% if not main_page %}true{% endif %});
     });
@@ -75,7 +85,7 @@
     {% if title %}
         <div class="nav-title">
             <a href="{{ back_to }}" class="back-link">&lt; Back</a>
-            <span class="header-title">{{ title }}</span>
+            <h1 class="header-title">{{ title }}</h1>
         </div>
     {% endif %}
 </header>
