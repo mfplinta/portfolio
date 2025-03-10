@@ -24,15 +24,15 @@ class Experience(models.Model):
 class Skill(models.Model):
     title = models.CharField(max_length=200)
     icon = models.CharField(max_length=100, choices=(
-        ('fab fa-python', 'Python'),
-        ('fab fa-js', 'JavaScript'),
-        ('fab fa-react', 'React'),
-        ('fab fa-docker', 'Docker'),
-        ('fas fa-database', 'Database'),
-        ('fab fa-microsoft', 'Microsoft'),
-        ('fab fa-ubuntu', 'Ubuntu'),
-        ('fab fa-github-alt', 'GitHub'),
-        ('fab fa-aws', 'AWS'),
+        ('icon-python', 'Python'),
+        ('icon-node-js', 'NodeJS'),
+        ('icon-react', 'React'),
+        ('icon-docker', 'Docker'),
+        ('icon-database', 'Database'),
+        ('icon-microsoft', 'Microsoft'),
+        ('icon-ubuntu', 'Ubuntu'),
+        ('icon-github-alt', 'GitHub'),
+        ('icon-aws', 'AWS'),
     ))
     tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE, null=True, blank=True)
 
