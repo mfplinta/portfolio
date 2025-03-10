@@ -11,6 +11,10 @@ def index(request):
     })
 
 def projects(request, tag=None):
+    if tag:
+        projects = Project.objects.filter(tags__tag=tag)
+    else:
+        projects = Project.objects.all()
     return render(request, 'main/projects.html', {
-        'projects': Project.objects.all()
+        'projects': projects
     })
