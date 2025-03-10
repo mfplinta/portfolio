@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-^uod8w=_=k5a(92q63me4vusfm$x(+t!f9n30hwq@mgn_rx_2x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -127,4 +125,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["matheusplinta.com", "www.matheusplinta.com"]
+CSRF_TRUSTED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
+CSRF_ALLOWED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
+CORS_ORIGINS_WHITELIST = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
