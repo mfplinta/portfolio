@@ -315,6 +315,11 @@ header {
     color: #333;
 }
 
+.projects-section {
+    display: flex;
+    gap: 30px;
+}
+
 .project-image {
     background-color: #E3E3E3;
     border-radius: 15px;
@@ -385,6 +390,22 @@ a.fill-div {
 .project-tag a {
     color: #fff;
     font-size: 0.8em;
+}
+
+.tag-black {
+    background-color: black;
+}
+
+.tag-blue {
+    background-color: darkblue;
+}
+
+.tag-red {
+    background-color: darkred;
+}
+
+.tag-orange {
+    background-color: rgb(154, 85, 0);
 }
 
 @media (max-width: 1000px) {

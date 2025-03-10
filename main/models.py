@@ -3,6 +3,12 @@ from django.db import models
 class ProjectTag(models.Model):
     tag = models.CharField(max_length=100, primary_key=True)
     name = models.CharField(max_length=100)
+    color = models.CharField(max_length=50, choices=(
+        ('tag-black', 'Black'),
+        ('tag-blue', 'Blue'),
+        ('tag-red', 'Red'),
+        ('tag-orange', 'Orange'),
+    ), default='tag-black')
 
     def __str__(self):
         return f'{self.name} ({self.tag})'
