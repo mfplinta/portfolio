@@ -3,61 +3,63 @@
 
 {% block title %}{{ "Home" }}{% endblock %}
 
-{% block content %}
+{% block body %}
     {% include 'main/header.html' with hero_section=True %}
-    <section class="skills-section">
-        <h2>Skills</h2>
-        <ul>
-            {% for skill in skills %}
-                <li>
-                    <a class="skill-item" {% if skill.tag %}href="{% url 'projects-withtag' skill.tag.tag %}"{% endif %}>
-                        <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
-                        <p>{{ skill.title }}</p>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-    <section class="education-section">
-        <h2>Education</h2>
-        <ul>
-            {% for education_item in education %}
-                <li>
-                    <div class="education-item">
-                        <div class="education-header">
-                            <div>
-                                <p class="education-title">{{ education_item.degree }}</p>
-                                <p class="education-school">{{ education_item.institution }}</p>
+    <div class="content">
+        <section class="skills-section">
+            <h2>Skills</h2>
+            <ul>
+                {% for skill in skills %}
+                    <li>
+                        <a class="skill-item" {% if skill.tag %}href="{% url 'projects-withtag' skill.tag.tag %}"{% endif %}>
+                            <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
+                            <p>{{ skill.title }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="education-section">
+            <h2>Education</h2>
+            <ul>
+                {% for education_item in education %}
+                    <li>
+                        <div class="education-item">
+                            <div class="education-header">
+                                <div>
+                                    <p class="education-title">{{ education_item.degree }}</p>
+                                    <p class="education-school">{{ education_item.institution }}</p>
+                                </div>
+                                <p class="education-dates">{{ education_item.start_date|date:"M Y" }} - {{ education_item.end_date|date:"M Y" }}</p>
                             </div>
-                            <p class="education-dates">{{ education_item.start_date|date:"M Y" }} - {{ education_item.end_date|date:"M Y" }}</p>
-                        </div>
-                        <div class="education-body">
-                            <p>{{ education_item.description_dotted_list|linebreaks }}</p>
-                        </div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-    <section class="experience-section">
-        <h2>Experience</h2>
-        <ul>
-            {% for experience in experiences %}
-                <li>
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div>
-                                <p class="experience-title">{{ experience.title }}</p>
-                                <p class="experience-company">{{ experience.company }}</p>
+                            <div class="education-body">
+                                <p>{{ education_item.description_dotted_list|linebreaks }}</p>
                             </div>
-                            <p class="experience-dates">{{ experience.start_date|date:"M Y" }} - {{ experience.end_date|date:"M Y" }}</p>
                         </div>
-                        <div class="experience-body">
-                            <p>{{ experience.description_dotted_list|linebreaks }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="experience-section">
+            <h2>Experience</h2>
+            <ul>
+                {% for experience in experiences %}
+                    <li>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <p class="experience-title">{{ experience.title }}</p>
+                                    <p class="experience-company">{{ experience.company }}</p>
+                                </div>
+                                <p class="experience-dates">{{ experience.start_date|date:"M Y" }} - {{ experience.end_date|date:"M Y" }}</p>
+                            </div>
+                            <div class="experience-body">
+                                <p>{{ experience.description_dotted_list|linebreaks }}</p>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
 {% endblock %}
