@@ -52,7 +52,7 @@ header {
 
 .top-buttons {
     position: fixed;
-    top: 10px;
+    top: 5px;
     right: 10px;
     display: flex;
     gap: 10px;
