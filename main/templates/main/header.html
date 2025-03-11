@@ -32,7 +32,6 @@
             heroGreeting.style.top = `${Math.max(10, 80 - scrollY)}px`;
             heroName.style.top = `${120 - Math.min(110, Math.max(0, scrollY))}px`;
             const leftPercentage = 50 - Math.min(46, scrollY);
-            console.log(leftPercentage)
             if(leftPercentage > 5) {
                 heroName.style.left = `${leftPercentage}%`;
                 heroName.style.transform = `translate(-${50 - Math.min(46, scrollY)}%, 0)`;
