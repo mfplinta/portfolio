@@ -13,9 +13,9 @@ def index(request):
 
 def projects(request, tag=None):
     if tag:
-        projects = Project.objects.filter(tags__tag=tag).order_by(F('date'))
+        projects = Project.objects.filter(tags__tag=tag).order_by(F('date').desc())
     else:
-        projects = Project.objects.all().order_by(F('date'))
+        projects = Project.objects.all().order_by(F('date').desc())
     return render(request, 'main/projects.html', {
         'projects': projects
     })
