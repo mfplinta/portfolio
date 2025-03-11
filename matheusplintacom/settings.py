@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-^uod8w=_=k5a(92q63me4vusfm$x(+t!f9n30hwq@mgn_rx_2x')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower == 'true'
-
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'true'
 
 # Application definition
 
@@ -126,7 +125,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ["matheusplinta.com", "www.matheusplinta.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "matheusplinta.com", "www.matheusplinta.com"]
 if DEBUG:
     ALLOWED_HOSTS += ['*']
 
