@@ -10,13 +10,13 @@
         <section class="projects-section">
             {% for project in projects %}
                 <div class="project-item">
-                    {% if project.git_url %}<a href="{{ project.git_url }}" target="_blank" class="fill-div"></a>{% endif %}
+			{% if project.git_url %}<a href="{{ project.git_url }}" target="_blank" class="fill-div" aria-label="Link to {{ project.title }}"></a>{% endif %}
                     <div class="project-header">
                         <p class="project-title">{{ project.title }}</p>
                         <p class="project-year">{{ project.date|date:"Y" }}</p>
                         <ul class="project-tags">
                             {% for tag in project.tags.all %}
-			    <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}" aria-label="Link to {{ project.title }}">{{ tag.tag }}</a></li>
+			    <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}" aria-label="Link to {{ tag.name }} tag filter">{{ tag.tag }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
