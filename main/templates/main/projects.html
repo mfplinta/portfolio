@@ -16,7 +16,7 @@
                         <p class="project-year">{{ project.date|date:"Y" }}</p>
                         <ul class="project-tags">
                             {% for tag in project.tags.all %}
-                                <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}">{{ tag.tag }}</a></li>
+			    <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}" aria-label="Link to {{ project.title }}">{{ tag.tag }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
