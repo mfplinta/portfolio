@@ -164,9 +164,6 @@ header {
 }
 
 .filter-desc {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
     font-size: 0.9em;
 }
 

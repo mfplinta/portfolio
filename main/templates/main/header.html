@@ -84,9 +84,10 @@
     {% if title %}
         <div class="nav-title">
             <a href="{{ back_to }}" class="back-link">&lt; Back</a>
-            <h1 class="header-title">{{ title }}</h1>
         {% if tag %}
             <span class="filter-desc"><a href="/projects/">Filtering by tag: <i>{{ tag }}</i></a></span>
+        {% else %}
+            <h1 class="header-title">{{ title }}</h1>
         {% endif %}
         </div>
     {% endif %}
