@@ -440,11 +440,15 @@ span.project-tag {
         color: initial;
     }
 
-    .top-button:active,
-    .nav-button a:active,
     .skill-item:active,
     .skill-icon:active {
         background: #000;
         color: #fff;
+    }
+
+    .top-button:active,
+    .nav-button a:active {
+        background: #fff;
+        color: #000;
     }
 }
