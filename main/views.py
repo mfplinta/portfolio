@@ -17,5 +17,6 @@ def projects(request, tag=None):
     else:
         projects = Project.objects.all().order_by(F('date').desc())
     return render(request, 'main/projects.html', {
-        'projects': projects
+        'projects': projects,
+        'tag': tag,
     })

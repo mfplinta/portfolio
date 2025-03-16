@@ -163,6 +163,13 @@ header {
     color: #333;
 }
 
+.filter-desc {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 0.9em;
+}
+
 .top-button {
     padding: 10px;
     border-radius: 50%;
