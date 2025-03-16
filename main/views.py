@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import F
 
-from main.models import Skill, Experience, Education, Project
+from main.models import Skill, Experience, Education, Project, ProjectTag
 
 
 def index(request):
@@ -18,5 +18,5 @@ def projects(request, tag=None):
         projects = Project.objects.all().order_by(F('date').desc())
     return render(request, 'main/projects.html', {
         'projects': projects,
-        'tag': tag,
+        'tag': ProjectTag.objects.get(tag=tag) if tag else None,
     })

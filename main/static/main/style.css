@@ -400,9 +400,13 @@ a.fill-div {
     z-index: 2;
 }
 
-.project-tag a {
+.project-tag a, span.project-tag {
     color: #fff;
     font-size: 0.8em;
+}
+
+span.project-tag {
+    padding: 5px 10px;
 }
 
 .tag-black {

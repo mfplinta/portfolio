@@ -85,7 +85,7 @@
         <div class="nav-title">
             <a href="{{ back_to }}" class="back-link">&lt; Back</a>
         {% if tag %}
-            <span class="filter-desc"><a href="/projects/">Filtering by tag: <i>{{ tag }}</i></a></span>
+            <span class="filter-desc"><a href="/projects/">Filtering by tag: <span class="project-tag {{ tag.color }}">{{ tag.tag }}</span></a></span>
         {% else %}
             <h1 class="header-title">{{ title }}</h1>
         {% endif %}
