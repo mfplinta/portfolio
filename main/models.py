@@ -52,6 +52,10 @@ class Education(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     description = models.TextField()
+    icon = models.CharField(max_length=100, null=True, blank=True, choices=(
+        ('icon-colts', 'Colts'),
+        ('icon-byu', 'BYU'),
+    ))
 
     @property
     def description_dotted_list(self):

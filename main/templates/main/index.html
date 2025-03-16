@@ -27,6 +27,7 @@
                     <li>
                         <div class="education-item">
                             <div class="education-header">
+                                {% if education_item.icon %}<div class="education-icon"><i class="{{ education_item.icon }}"></i></div>{% endif %}
                                 <div>
                                     <p class="education-title">{{ education_item.degree }}</p>
                                     <p class="education-school">{{ education_item.institution }}</p>

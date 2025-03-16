@@ -10,6 +10,8 @@
   /* font-size: 120%; */
 }
 
+.icon-byu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9ca;&nbsp;'); }
+.icon-colts { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe9cb;&nbsp;'); }
 .icon-github { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;'); }
 .icon-linkedin-in { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0e1;&nbsp;'); }
 .icon-github-alt { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf113;&nbsp;'); }

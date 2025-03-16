@@ -1,4 +1,6 @@
 
+.icon-byu:before { content: '\e9ca'; } /* '' */
+.icon-colts:before { content: '\e9cb'; } /* '' */
 .icon-github:before { content: '\f09b'; } /* '' */
 .icon-linkedin-in:before { content: '\f0e1'; } /* '' */
 .icon-github-alt:before { content: '\f113'; } /* '' */
