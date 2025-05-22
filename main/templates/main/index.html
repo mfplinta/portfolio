@@ -25,7 +25,7 @@
             <ul>
                 {% for education_item in education %}
                     <li>
-                        <div class="education-item">
+                        <a class="education-item" {% if education_item.link %}href="{{ education_item.link }}"{% endif %}>
                             <div class="education-header">
                                 {% if education_item.icon %}<div class="education-icon"><i class="{{ education_item.icon }}"></i></div>{% endif %}
                                 <div>
@@ -37,7 +37,7 @@
                             <div class="education-body">
                                 <p>{{ education_item.description_dotted_list|linebreaks }}</p>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>

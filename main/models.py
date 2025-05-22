@@ -56,6 +56,7 @@ class Education(models.Model):
         ('icon-colts', 'Colts'),
         ('icon-byu', 'BYU'),
     ))
+    link = models.FileField(upload_to='files/', null=True, blank=True)
 
     @property
     def description_dotted_list(self):
@@ -71,7 +72,7 @@ class Project(models.Model):
     description = models.TextField()
     git_url = models.URLField(null=True, blank=True)
     tags = models.ManyToManyField(ProjectTag)
-    image = models.ImageField(upload_to='projects/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
