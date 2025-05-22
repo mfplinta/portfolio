@@ -25,7 +25,7 @@
             <ul>
                 {% for education_item in education %}
                     <li>
-                        <a class="education-item" {% if education_item.file %}href="{{ education_item.file.url }}"{% endif %}>
+                        <a class="education-item" {% if education_item.file %}href="{{ education_item.file.url }}" target="_blank" aria-label="Link to {{ education_item.file }}"{% endif %}>
                             <div class="education-header">
                                 {% if education_item.icon %}<div class="education-icon"><i class="{{ education_item.icon }}"></i></div>{% endif %}
                                 <div>
