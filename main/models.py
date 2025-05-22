@@ -56,7 +56,7 @@ class Education(models.Model):
         ('icon-colts', 'Colts'),
         ('icon-byu', 'BYU'),
     ))
-    link = models.FileField(upload_to='files/', null=True, blank=True)
+    file = models.FileField(upload_to='files/', null=True, blank=True)
 
     @property
     def description_dotted_list(self):
