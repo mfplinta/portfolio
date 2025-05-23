@@ -187,7 +187,7 @@ header {
 
 .ots-banner {
     display: flex;
-    background: #000;
+    background: #6073b9;
     width: 100%;
     flex: 0 1 100%;
     gap: 10px;
@@ -204,7 +204,7 @@ header {
 .ots-banner a {
     cursor: pointer;
     border: 2px solid white;
-    background-color: black;
+    background-color: transparent;
     color: white;
     padding: 5px;
     transition: background 0.3s ease, color 0.3s ease;
@@ -214,7 +214,7 @@ header {
 
 .ots-banner a:hover {
     background-color: white;
-    color: black;
+    color: #6073b9;
 }
 
 .skills-section {
