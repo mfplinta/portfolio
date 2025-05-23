@@ -268,7 +268,6 @@ header {
 }
 .experience-item {
     text-align: left;
-    margin-top: 20px;
     border: 1px solid #000;
     border-radius: 15px;
     overflow: hidden;
@@ -382,11 +381,19 @@ header {
     font-family: Arial, sans-serif;
 }
 
+.skills-section h2 {
+    margin-bottom: 15px;
+}
+
 .skills-section h2,
 .experience-section h2,
 .education-section h2 {
     padding-top: 15px;
-    padding-bottom: 10px;
+}
+
+.experience-item,
+.education-item {
+    margin-top: 15px;
 }
 
 
