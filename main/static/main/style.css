@@ -20,11 +20,18 @@
     justify-content: space-evenly;
     align-items: start;
     align-content: start;
-    row-gap: 30px;
-    grid-gap: 50px;
 }
 
 .horizontal-padded {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: start;
+    align-content: start;
+    row-gap: 30px;
+    grid-gap: 50px;
     padding: 0 50px;
 }
 
@@ -180,11 +187,13 @@ header {
 
 .ots-banner {
     display: flex;
+    background: #000;
+    width: 100%;
+    flex: 0 1 100%;
+    gap: 10px;
+    padding: 10px;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    background: #000;
-    padding: 20px 10px;
 }
 
 .ots-banner p {
@@ -199,6 +208,8 @@ header {
     color: white;
     padding: 5px;
     transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 15px;
+    white-space: nowrap;
 }
 
 .ots-banner a:hover {
