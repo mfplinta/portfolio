@@ -31,7 +31,7 @@
     align-items: start;
     align-content: start;
     row-gap: 30px;
-    grid-gap: 50px;
+    grid-gap: 40px;
     padding: 0 50px;
 }
 
@@ -226,9 +226,7 @@ header {
     list-style: none;
     padding: 0;
 }
-.skills-section h2 {
-    padding-bottom: 15px;
-}
+
 .skill-item {
     display: flex;
     align-items: center;
@@ -262,10 +260,6 @@ header {
 
 .experience-section {
     flex: 0 1 400px;
-}
-
-.experience-section h2 {
-    padding-top: 10px;
 }
 
 .experience-section ul {
@@ -317,14 +311,9 @@ header {
     padding: 0;
 }
 
-.education-section h2 {
-    padding-top: 10px;
-}
-
 .education-item {
     display: block;
     text-align: left;
-    margin-top: 20px;
     border: 1px solid #000;
     border-radius: 15px;
     overflow: hidden;
@@ -392,6 +381,14 @@ header {
     background-color: #fff;
     font-family: Arial, sans-serif;
 }
+
+.skills-section h2,
+.experience-section h2,
+.education-section h2 {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
 
 a.fill-div {
     position: absolute;
