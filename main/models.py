@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import ImageField
+from imagekit.models import ImageSpecField
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
@@ -75,7 +77,8 @@ class Project(models.Model):
     description = MarkdownxField()
     git_url = models.URLField(null=True, blank=True)
     tags = models.ManyToManyField(ProjectTag)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = ImageField(upload_to='images/', null=True, blank=True)
+    image_webp = ImageSpecField(source='image', format='webp', options={'quality': 60})
 
     @property
     def formatted_description(self):
