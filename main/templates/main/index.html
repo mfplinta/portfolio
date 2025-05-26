@@ -17,10 +17,10 @@
                 <ul>
                     {% for skill in skills %}
                         <li>
-                            <a class="skill-item" {% if skill.tag %}href="{% url 'projects-withtag' skill.tag.tag %}"{% endif %}>
+                            <div class="skill-item">
                                 <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
                                 <p>{{ skill.title }}</p>
-                            </a>
+                            </div>
                         </li>
                     {% endfor %}
                 </ul>
@@ -30,7 +30,7 @@
                 <ul>
                     {% for education_item in education %}
                         <li>
-                            <a class="education-item" {% if education_item.file %}href="{{ education_item.file.url }}" target="_blank" aria-label="Link to {{ education_item.file }}"{% endif %}>
+                            <div class="education-item">
                                 <div class="education-header">
                                     {% if education_item.icon %}<div class="education-icon"><i class="{{ education_item.icon }}"></i></div>{% endif %}
                                     <div>
@@ -39,10 +39,10 @@
                                     </div>
                                     <p class="education-dates">{{ education_item.start_date|date:"M Y" }} - {{ education_item.end_date|date:"M Y" }}</p>
                                 </div>
-                                <div class="education-body">
-                                    <p>{{ education_item.description_dotted_list|linebreaks }}</p>
+                                <div class="education-body markdown">
+                                    {{ education_item.formatted_description|safe }}
                                 </div>
-                            </a>
+                            </div>
                         </li>
                     {% endfor %}
                 </ul>
@@ -61,7 +61,7 @@
                                     <p class="experience-dates">{{ experience.start_date|date:"M Y" }} - {{ experience.end_date|date:"M Y" }}</p>
                                 </div>
                                 <div class="experience-body">
-                                    <p>{{ experience.description_dotted_list|linebreaks }}</p>
+                                    <p>{{ experience.formatted_description|safe }}</p>
                                 </div>
                             </div>
                         </li>

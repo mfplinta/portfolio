@@ -1,4 +1,7 @@
 from django.db import models
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
+
 
 class ProjectTag(models.Model):
     tag = models.CharField(max_length=100, primary_key=True)
@@ -18,11 +21,11 @@ class Experience(models.Model):
     company = models.CharField(max_length=200)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    description = models.TextField()
+    description = MarkdownxField()
 
     @property
-    def description_dotted_list(self):
-        return self.description.replace('- ', '• ')
+    def formatted_description(self):
+        return markdownify(self.description)
 
     def __str__(self):
         return f'{self.title} at {self.company}, {self.start_date:%b-%Y} - {(self.end_date.strftime('%b-%Y') if self.end_date is not None else ''):}'
@@ -51,7 +54,7 @@ class Education(models.Model):
     institution = models.CharField(max_length=200)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    description = models.TextField()
+    description = MarkdownxField()
     icon = models.CharField(max_length=100, null=True, blank=True, choices=(
         ('icon-colts', 'Colts'),
         ('icon-byu', 'BYU'),
@@ -59,8 +62,8 @@ class Education(models.Model):
     file = models.FileField(upload_to='files/', null=True, blank=True)
 
     @property
-    def description_dotted_list(self):
-        return self.description.replace('- ', '• ')
+    def formatted_description(self):
+        return markdownify(self.description)
 
     def __str__(self):
         return f'{self.degree} at {self.institution}, {self.start_date:%b-%Y} - {(self.end_date.strftime('%b-%Y') if self.end_date is not None else ''):}'
@@ -69,10 +72,14 @@ class Education(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
-    description = models.TextField()
+    description = MarkdownxField()
     git_url = models.URLField(null=True, blank=True)
     tags = models.ManyToManyField(ProjectTag)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    @property
+    def formatted_description(self):
+        return markdownify(self.description)
 
     def __str__(self):
         return self.title

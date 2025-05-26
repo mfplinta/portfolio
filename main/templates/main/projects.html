@@ -2,29 +2,34 @@
 {% load static %}
 
 {% block title %}{{ "Projects" }}{% endblock %}
-{% block meta-description %}{{ "I'm Matt (Matheus Plinta). A few of the projects I have built along the years." }}{% endblock %}
+{% block meta-description %}
+    {{ "I'm Matt (Matheus Plinta). A few of the projects I have built along the years." }}{% endblock %}
 
 {% block body %}
     {% include 'main/header.html' with title='Projects' back_to='/' tag=tag %}
     <div class="content">
-        <section class="projects-section">
-            {% for project in projects %}
-                <div class="project-item">
-			{% if project.git_url %}<a href="{{ project.git_url }}" target="_blank" class="fill-div" aria-label="Link to {{ project.title }}"></a>{% endif %}
-                    <div class="project-header">
-                        <p class="project-title">{{ project.title }}</p>
-                        <p class="project-year">{{ project.date|date:"Y" }}</p>
-                        <ul class="project-tags">
-                            {% for tag in project.tags.all %}
-			    <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}" aria-label="Link to {{ tag.name }} tag filter">{{ tag.tag }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="project-body">
-			    <img src="{% if project.image %}{{ project.image.url }}{% else %}{% static 'main/imgs/placeholder.png' %}{% endif %}" alt="Image of {{ project.title }}" class="project-image" style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};" />
-                        <p>{{ project.description|linebreaks }}</p>
-                    </div>
+    <section class="projects-section">
+        {% for project in projects %}
+            <div class="project-item">
+                <div class="project-header">
+                    <p class="project-title">{{ project.title }}</p>
+                    <p class="project-year">{{ project.date|date:"Y" }}</p>
+                    <ul class="project-tags">
+                        {% for tag in project.tags.all %}
+                            <li class="project-tag {{ tag.color }}"><a href="{% url 'projects-withtag' tag.tag %}"
+                                                                       aria-label="Link to {{ tag.name }} tag filter">{{ tag.tag }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-            {% endfor %}
-        </section>
+                <div class="project-body">
+                    <img src="
+                            {% if project.image %}{{ project.image.url }}{% else %}{% static 'main/imgs/placeholder.png' %}{% endif %}"
+                         alt="Image of {{ project.title }}" class="project-image"
+                         style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};"/>
+                    <p>{{ project.formatted_description|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}
