@@ -513,3 +513,6 @@ span.project-tag {
 .markdown p a {
     text-decoration: underline;
 }
+.markdown p a:before {
+    content: "↗ ";
+}
