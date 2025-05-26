@@ -17,10 +17,10 @@
                 <ul>
                     {% for skill in skills %}
                         <li>
-                            <div class="skill-item">
+                            <a class="skill-item" {% if skill.tag %}href="{% url 'projects-withtag' skill.tag.tag %}"{% endif %}>
                                 <div class="skill-icon"><i class="{{ skill.icon }}"></i></div>
                                 <p>{{ skill.title }}</p>
-                            </div>
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
