@@ -78,6 +78,7 @@ class Project(models.Model):
     git_url = models.URLField(null=True, blank=True)
     tags = models.ManyToManyField(ProjectTag)
     image = ImageField(upload_to='images/', null=True, blank=True)
+    image_thumbnail = ImageSpecField(source='image', format='webp', options={'quality': 60})
     image_webp = ImageSpecField(source='image', format='webp', options={'quality': 60})
 
     @property
