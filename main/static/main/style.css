@@ -1,14 +1,75 @@
 /* Reset */
-*,::after,::before{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}canvas,img,picture,svg,video{display:block;max-width:100%}button,input,select,textarea{font:inherit}h1,h2,h3,h4,h5,h6,p{overflow-wrap:break-word}p{text-wrap:pretty}h1,h2,h3,h4,h5,h6{text-wrap:balance}#__next,#root{isolation:isolate}
+*, ::after, ::before {
+    box-sizing: border-box
+}
+
+* {
+    margin: 0
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased
+}
+
+canvas, img, picture, svg, video {
+    display: block;
+    max-width: 100%
+}
+
+button, input, select, textarea {
+    font: inherit
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    overflow-wrap: break-word
+}
+
+p {
+    text-wrap: pretty
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance
+}
+
+#__next, #root {
+    isolation: isolate
+}
 
 /* Fonts */
 @font-face {
-  font-family: 'Inter';
+    font-family: 'Inter';
     font-style: normal;
     font-display: swap;
     src: url(fonts/inter-variablefont_opszwght-webfont.woff) format('woff');
     src: url(fonts/inter-variablefont_opszwght-webfont.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    --primary-color: #000;
+    --secondary-color: #6073b9;
+    --tertiary-color: #fff;
+    --quaternary-color: #444;
+    --button-active-color-bg: var(--tertiary-color);
+    --button-active-color-fg: var(--primary-color);
+    --button-active-color-border: var(--primary-color);
+    --button-inactive-color-bg: var(--primary-color);
+    --button-inactive-color-fg: var(--tertiary-color);
+    --button-inactive-color-border: var(--primary-color);
+    --skill-inactive-color-bg: var(--tertiary-color);
+    --skill-inactive-color-fg: var(--primary-color);
+    --skill-active-color-bg: var(--primary-color);
+    --skill-active-color-fg: var(--tertiary-color);
+}
+
+body {
+    background-color: var(--tertiary-color);
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, li {
+    font-family: 'Inter', sans-serif;
 }
 
 /* Main */
@@ -20,6 +81,7 @@
     justify-content: space-evenly;
     align-items: start;
     align-content: start;
+    color: var(--primary-color);
 }
 
 .horizontal-padded {
@@ -33,10 +95,6 @@
     row-gap: 30px;
     grid-gap: 40px;
     padding: 0 50px;
-}
-
-h1, h2, h3, h4, h5, h6, p, a, span, li {
-    font-family: 'Inter', sans-serif;
 }
 
 h2 {
@@ -56,11 +114,47 @@ a {
 }
 
 header {
-    background-color: white;
+    background-color: var(--tertiary-color);
     width: 100%;
     position: fixed;
     z-index: 1000;
 }
+
+/* Logo */
+.animate-path {
+    stroke: var(--primary-color);
+    fill: var(--tertiary-color);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 2s forwards, fillIn 1s 1s forwards, drawReverse 1s 2s forwards;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillIn {
+    from {
+        fill: var(--tertiary-color);
+    }
+    to {
+        fill: var(--primary-color);
+    }
+}
+
+@keyframes drawReverse {
+    from {
+        stroke-dasharray: 0;
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+    }
+}
+
 
 .top-buttons {
     position: fixed;
@@ -70,10 +164,11 @@ header {
     gap: 10px;
     z-index: 1001;
 }
+
 .top-button {
-    background: #000;
-    border: 1px solid #000;
-    color: #fff;
+    background: var(--button-inactive-color-bg);
+    border: 1px solid var(--button-inactive-color-border);
+    color: var(--button-inactive-color-fg);
     padding: 10px;
     border-radius: 50%;
     display: flex;
@@ -82,9 +177,10 @@ header {
     text-decoration: none;
     transition: background 0.3s ease, color 0.3s ease;
 }
+
 .top-button:hover {
-    background: #fff;
-    color: #000;
+    background: var(--button-active-color-bg);
+    color: var(--button-active-color-fg);
 }
 
 .hero-section {
@@ -100,7 +196,7 @@ header {
 
 .hero-greeting {
     position: absolute;
-    color: #444;
+    color: var(--quaternary-color);
     padding-bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0);
@@ -134,18 +230,19 @@ header {
 
 .nav-button a {
     display: inline-block;
-    background: #000;
-    color: #fff;
+    background: var(--button-inactive-color-bg);
+    color: var(--button-inactive-color-fg);
     padding: 5px 50px;
     text-decoration: none;
     border-radius: 15px;
-    border: 1px solid #000;
+    border: 1px solid var(--button-inactive-color-border);
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .nav-button a:hover {
-    color: #000;
-    background: #fff;
+    color: var(--button-active-color-fg);
+    background: var(--button-active-color-bg);
+    border: 1px solid var(--button-active-color-border);
 }
 
 .nav-title {
@@ -153,25 +250,25 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 10px;
-    border-bottom: 1px solid #ddd;
-    background-color: #fff;
+    border-bottom: 1px solid var(--primary-color);
+    background-color: var(--tertiary-color);
 }
 
 .back-link {
     font-size: 1em;
-    color: #333;
+    color: var(--quaternary-color);
     text-decoration: none;
     font-weight: bold;
 }
 
 .back-link:hover {
-    color: #000;
+    color: var(--primary-color);
 }
 
 .header-title {
     font-size: 1.25em;
     font-weight: bold;
-    color: #333;
+    color: var(--primary-color);
 }
 
 .filter-desc {
@@ -181,13 +278,13 @@ header {
 .top-button {
     padding: 10px;
     border-radius: 50%;
-    background-color: black;
+    background-color: var(--button-inactive-color-bg);
     font-size: 1.3rem;
 }
 
 .ots-banner {
     display: flex;
-    background: #6073b9;
+    background: var(--secondary-color);
     width: 100%;
     flex: 0 1 100%;
     gap: 10px;
@@ -214,7 +311,7 @@ header {
 
 .ots-banner a:hover {
     background-color: white;
-    color: #6073b9;
+    color: var(--secondary-color);
 }
 
 .skills-section {
@@ -230,31 +327,34 @@ header {
 .skill-item {
     display: flex;
     align-items: center;
-    border: 1px solid #000;
-    color: #333;
+    border: 1px solid var(--skill-inactive-color-fg);
+    color: var(--skill-inactive-color-fg);
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
     gap: 10px;
     transition: background 0.3s ease, color 0.3s ease;
 }
+
 .skill-item:hover {
-    background: #000;
-    color: #fff;
+    background: var(--skill-active-color-bg);
+    color: var(--skill-active-color-fg);
 }
+
 .skill-icon {
     width: 30px;
     height: 30px;
-    background: #000;
-    color: #fff;
+    background: var(--skill-inactive-color-fg);
+    color: var(--skill-inactive-color-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: background 0.3s ease, color 0.3s ease;
 }
+
 .skill-icon i {
-    color: #fff;
+    color: var(--skill-inactive-color-bg);
     font-size: 16px;
 }
 
@@ -266,12 +366,14 @@ header {
     list-style: none;
     padding: 0;
 }
+
 .experience-item {
     text-align: left;
     border: 1px solid #000;
     border-radius: 15px;
     overflow: hidden;
 }
+
 .experience-header {
     background: #000;
     color: #fff;
@@ -281,20 +383,24 @@ header {
     align-items: flex-start;
     flex-wrap: wrap;
 }
+
 .experience-header div {
     display: flex;
     flex-direction: column;
 }
+
 .experience-company {
     font-size: 14px;
     font-weight: bold;
 }
+
 .experience-dates {
     font-size: 0.8em;
     margin-left: auto;
     white-space: nowrap;
     align-self: flex-start;
 }
+
 .experience-body {
     color: #333;
     padding: 10px;
@@ -374,10 +480,10 @@ header {
 
 .project-item {
     position: relative;
-    border: 1px solid #000;
+    border: 1px solid var(--primary-color);
     border-radius: 15px;
     width: 300px;
-    background-color: #fff;
+    background-color: var(--tertiary-color);
     font-family: Arial, sans-serif;
 }
 
@@ -413,7 +519,7 @@ a.fill-div {
     align-items: baseline;
     margin-bottom: 10px;
     padding: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .project-title {
@@ -422,7 +528,7 @@ a.fill-div {
 
 .project-year {
     font-size: 0.95em;
-    color: #777;
+    color: var(--quaternary-color);
     margin-top: 5px;
 }
 
@@ -434,7 +540,7 @@ a.fill-div {
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    padding-inline-start: 0px;
+    padding-inline-start: 0;
     justify-content: flex-end;
     flex: 1 0 100%;
     gap: 10px;
@@ -442,15 +548,19 @@ a.fill-div {
 }
 
 .project-tag {
-    background-color: #000;
+    background-color: var(--primary-color);
     padding: 0 10px;
     border-radius: 15px;
     z-index: 2;
 }
 
 .project-tag a, span.project-tag {
-    color: #fff;
+    color: var(--tertiary-color);
     font-size: 0.8em;
+}
+
+.filter-desc a {
+    color: var(--primary-color);
 }
 
 span.project-tag {
@@ -473,6 +583,35 @@ span.project-tag {
     background-color: rgb(154, 85, 0);
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #fff;
+        --secondary-color: #384b8a;
+        --tertiary-color: #000;
+        --quaternary-color: #aaa;
+        --button-active-color-bg: var(--primary-color);
+        --button-active-color-fg: var(--tertiary-color);
+        --button-inactive-color-bg: var(--tertiary-color);
+        --button-inactive-color-fg: var(--primary-color);
+    }
+
+    .tag-black {
+        background-color: #fff;
+    }
+
+    .tag-blue {
+        background-color: #4242d9;
+    }
+
+    .tag-red {
+        background-color: #d76b6b;
+    }
+
+    .tag-orange {
+        background-color: #e0a170;
+    }
+}
+
 @media (max-width: 1000px) {
     .content {
         padding: 30px 0;
@@ -484,25 +623,38 @@ span.project-tag {
 }
 
 @media (hover: none) {
-    .top-button:hover,
-    .nav-button a:hover,
-    .skill-item:hover,
-    .ots-banner a:hover,
-    .skill-icon:hover {
-        background: initial;
-        color: initial;
+    .ots-banner a:hover {
+        background-color: var(--secondary-color);
+        color: white;
     }
 
-    .skill-item:active,
-    .skill-icon:active {
-        background: #000;
-        color: #fff;
+    .top-button:hover,
+    .nav-button a:hover {
+        background: var(--button-active-color-fg);
+        color: var(--button-active-color-bg);
     }
 
     .top-button:active,
     .nav-button a:active {
-        background: #fff;
-        color: #000;
+        background: var(--button-active-color-bg);
+        color: var(--button-active-color-fg);
+    }
+
+    .skill-item:hover,
+    .skill-icon:hover {
+        background: var(--button-active-color-bg);
+        color: var(--button-active-color-fg);
+    }
+
+    .skill-item:active,
+    .skill-icon:active {
+        background: var(--button-active-color-fg);
+        color: var(--button-active-color-bg);
+    }
+
+    .ots-banner a:active {
+        background: white;
+        color: var(--secondary-color);
     }
 }
 
@@ -511,9 +663,11 @@ span.project-tag {
     padding-left: 1em;
     list-style: disc;
 }
+
 .markdown p a {
     text-decoration: underline;
 }
+
 .markdown p a:before {
     content: "↗ ";
 }
