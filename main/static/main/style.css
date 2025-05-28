@@ -570,7 +570,7 @@ span.project-tag {
     :root {
         --primary-color: #eee;
         --secondary-color: #384b8a;
-        --tertiary-color: #000;
+        --tertiary-color: #111;
         --quaternary-color: #aaa;
         --button-active-color-bg: var(--primary-color);
         --button-active-color-fg: var(--tertiary-color);
