@@ -652,7 +652,7 @@ span.project-tag {
 
 .markdown p a {
     text-decoration: underline;
-    color: var(--primary-color);
+    color: var(--quaternary-color);
 }
 
 .markdown p a:before {
