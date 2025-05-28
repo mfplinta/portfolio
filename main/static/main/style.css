@@ -123,6 +123,46 @@ header {
     z-index: 1000;
 }
 
+#theme-toggle {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    border-radius: 12px;
+    background: var(--button-inactive-color-bg);
+    border: 1px solid var(--button-inactive-color-border);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+#theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--button-inactive-color-fg);
+    transition: transform 0.3s ease;
+    left: 2px;
+}
+
+#theme-toggle i {
+    position: absolute;
+    font-size: 0.85rem;
+    transition: opacity 0.3s ease;
+}
+
+#theme-toggle .icon-sun {
+    opacity: 1;
+}
+
+#theme-toggle .icon-moon {
+    right: 2px;
+    opacity: 0;
+}
+
 /* Logo */
 .animate-path {
     stroke: var(--primary-color);
@@ -160,10 +200,11 @@ header {
 
 
 .top-buttons {
+    display: flex;
+    align-items: center;
     position: fixed;
     top: 5px;
     right: 10px;
-    display: flex;
     gap: 10px;
     z-index: 1001;
 }
@@ -567,26 +608,27 @@ span.project-tag {
     background-color: rgb(154, 85, 0);
 }
 
-.tag-black a, .tag-blue a, .tag-red a, .tag-orange a {
+.tag-black, .tag-black a,
+.tag-blue, .tag-blue a,
+.tag-red, .tag-red a,
+.tag-orange, .tag-orange a {
     color: var(--tertiary-color);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color: #eee;
-        --secondary-color: #384b8a;
-        --tertiary-color: #111;
-        --quaternary-color: #aaa;
-        --quinary-color: #1c1c1c;
-        --button-active-color-bg: var(--primary-color);
-        --button-active-color-fg: var(--tertiary-color);
-        --button-inactive-color-bg: var(--quinary-color);
-        --button-inactive-color-fg: var(--primary-color);
-        --section-header-color-bg: var(--quinary-color);
-        --section-header-color-fg: var(--primary-color);
-        --section-color-border: var(--primary-color);
-        --skill-inactive-color-bg: var(--quinary-color);
-    }
+[data-theme="dark"] {
+    --primary-color: #eee;
+    --secondary-color: #384b8a;
+    --tertiary-color: #111;
+    --quaternary-color: #aaa;
+    --quinary-color: #1c1c1c;
+    --button-active-color-bg: var(--primary-color);
+    --button-active-color-fg: var(--tertiary-color);
+    --button-inactive-color-bg: var(--quinary-color);
+    --button-inactive-color-fg: var(--primary-color);
+    --section-header-color-bg: var(--quinary-color);
+    --section-header-color-fg: var(--primary-color);
+    --section-color-border: var(--primary-color);
+    --skill-inactive-color-bg: var(--quinary-color);
 
     .tag-black {
         background-color: #fff;
@@ -604,12 +646,24 @@ span.project-tag {
         background-color: #e0a170;
     }
 
-    .tag-blue a {
+    .tag-blue, .tag-blue a {
         color: var(--primary-color);
     }
 
     .project-header {
         background-color: var(--quinary-color);
+    }
+
+    #theme-toggle::before {
+        transform: translateX(24px);
+    }
+
+    #theme-toggle .icon-sun {
+        opacity: 0;
+    }
+
+    #theme-toggle .icon-moon {
+        opacity: 1;
     }
 }
 

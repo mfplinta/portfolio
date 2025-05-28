@@ -4,6 +4,8 @@
 .icon-github:before { content: '\f09b'; } /* '' */
 .icon-linkedin-in:before { content: '\f0e1'; } /* '' */
 .icon-github-alt:before { content: '\f113'; } /* '' */
+.icon-sun:before { content: '\f185'; } /* '' */
+.icon-moon:before { content: '\f186'; } /* '' */
 .icon-database:before { content: '\f1c0'; } /* '' */
 .icon-aws:before { content: '\f375'; } /* '' */
 .icon-docker:before { content: '\f395'; } /* '' */
