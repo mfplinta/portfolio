@@ -65,6 +65,9 @@ h1, h2, h3, h4, h5, h6 {
     --section-header-color-bg: var(--primary-color);
     --section-header-color-fg: var(--tertiary-color);
     --section-color-border: var(--primary-color);
+
+    --border-radius: 15px;
+    --transition-speed: 0.3s;
 }
 
 body {
@@ -79,8 +82,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, li {
 .content {
     padding: 30px 0;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: start;
     align-content: start;
@@ -131,7 +133,7 @@ header {
     background: var(--button-inactive-color-bg);
     border: 1px solid var(--button-inactive-color-border);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed) ease;
     display: flex;
     align-items: center;
     padding: 2px;
@@ -144,14 +146,14 @@ header {
     height: 18px;
     border-radius: 50%;
     background: var(--button-inactive-color-fg);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
     left: 2px;
 }
 
 #theme-toggle i {
     position: absolute;
     font-size: 0.85rem;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-speed) ease;
 }
 
 #theme-toggle .icon-sun {
@@ -219,15 +221,12 @@ header {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .top-button:hover {
     background: var(--button-active-color-bg);
     color: var(--button-active-color-fg);
-}
-
-.hero-section {
 }
 
 .hero-section div {
@@ -278,9 +277,9 @@ header {
     color: var(--button-inactive-color-fg);
     padding: 5px 50px;
     text-decoration: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--button-inactive-color-border);
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .nav-button a:hover {
@@ -348,8 +347,8 @@ header {
     background-color: transparent;
     color: white;
     padding: 5px;
-    transition: background 0.3s ease, color 0.3s ease;
-    border-radius: 15px;
+    transition: all var(--transition-speed) ease;
+    border-radius: var(--border-radius);
     white-space: nowrap;
 }
 
@@ -363,11 +362,6 @@ header {
     width: 100%;
 }
 
-.skills-section ul {
-    list-style: none;
-    padding: 0;
-}
-
 .skill-item {
     display: flex;
     align-items: center;
@@ -375,10 +369,10 @@ header {
     color: var(--skill-inactive-color-fg);
     background-color: var(--skill-inactive-color-bg);
     padding: 10px;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     margin: 5px 0;
     gap: 10px;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .skill-item:hover {
@@ -395,7 +389,7 @@ header {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .skill-icon i {
@@ -407,15 +401,10 @@ header {
     flex: 0 1 400px;
 }
 
-.experience-section ul {
-    list-style: none;
-    padding: 0;
-}
-
 .experience-item,
 .education-item {
     border: 1px solid var(--section-color-border);
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     overflow: hidden;
     text-align: left;
     margin-top: 15px;
@@ -459,11 +448,6 @@ header {
     width: 100%;
 }
 
-.education-section ul {
-    list-style: none;
-    padding: 0;
-}
-
 .education-header div {
     display: flex;
     flex-direction: column;
@@ -497,7 +481,7 @@ header {
 
 .project-image {
     background-color: #E3E3E3;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     margin-bottom: 10px;
     width: 100%;
     height: 160px;
@@ -506,7 +490,7 @@ header {
 .project-item {
     position: relative;
     border: 1px solid var(--primary-color);
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     width: 300px;
     background-color: var(--tertiary-color);
     font-family: Arial, sans-serif;
@@ -516,11 +500,19 @@ header {
     margin-bottom: 15px;
 }
 
-.skills-section h2,
+.experience-section ul,
+.education-section ul,
+.skills-section ul {
+    list-style: none;
+    padding: 0;
+}
+
 .experience-section h2,
-.education-section h2 {
+.education-section h2,
+.skills-section h2 {
     padding-top: 15px;
 }
+
 
 .experience-item,
 .education-item {
@@ -576,7 +568,7 @@ a.fill-div {
 
 .project-tag {
     padding: 0 10px;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     z-index: 2;
 }
 
@@ -622,7 +614,7 @@ span.project-tag {
     --quaternary-color: #aaa;
     --quinary-color: #1c1c1c;
     --button-active-color-bg: var(--primary-color);
-    --button-active-color-fg: var(--tertiary-color);
+    --button-active-color-fg: var(--quinary-color);
     --button-inactive-color-bg: var(--quinary-color);
     --button-inactive-color-fg: var(--primary-color);
     --section-header-color-bg: var(--quinary-color);
@@ -710,6 +702,19 @@ span.project-tag {
     .skill-icon:active {
         background: var(--button-active-color-fg);
         color: var(--button-active-color-bg);
+    }
+
+    [data-theme="dark"] {
+        .skill-item:hover,
+        .skill-icon:hover {
+            background: var(--button-active-color-fg);
+            color: var(--button-active-color-bg);
+        }
+        .skill-item:active,
+        .skill-icon:active {
+            background: var(--button-active-color-bg);
+            color: var(--button-active-color-fg);
+        }
     }
 }
 
