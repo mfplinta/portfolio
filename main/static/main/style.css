@@ -72,6 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     background-color: var(--tertiary-color);
+    transition: background-color var(--transition-speed) ease;
 }
 
 h1, h2, h3, h4, h5, h6, p, a, span, li {
@@ -123,6 +124,7 @@ header {
     width: 100%;
     position: fixed;
     z-index: 1000;
+    transition: background-color var(--transition-speed) ease;
 }
 
 #theme-toggle {
@@ -295,6 +297,7 @@ header {
     padding: 10px 10px;
     border-bottom: 1px solid var(--primary-color);
     background-color: var(--tertiary-color);
+    transition: all var(--transition-speed) ease;
 }
 
 .back-link {
@@ -404,6 +407,7 @@ header {
 .experience-item,
 .education-item {
     border: 1px solid var(--section-color-border);
+    transition: border-color var(--transition-speed) ease;
     border-radius: var(--border-radius);
     overflow: hidden;
     text-align: left;
@@ -494,6 +498,7 @@ header {
     width: 300px;
     background-color: var(--tertiary-color);
     font-family: Arial, sans-serif;
+    transition: all var(--transition-speed) ease;
 }
 
 .skills-section h2 {
@@ -539,6 +544,7 @@ a.fill-div {
     border-bottom: 1px solid var(--primary-color);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    transition: border-color var(--transition-speed) ease;
 }
 
 .project-title {
@@ -574,6 +580,7 @@ a.fill-div {
 
 .project-tag a, span.project-tag {
     font-size: 0.8em;
+    transition: all var(--transition-speed) ease;
 }
 
 .filter-desc a {
