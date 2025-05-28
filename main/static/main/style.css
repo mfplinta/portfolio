@@ -367,21 +367,28 @@ header {
     padding: 0;
 }
 
-.experience-item {
-    text-align: left;
-    border: 1px solid #000;
+.experience-item,
+.education-item {
+    border: 1px solid var(--primary-color);
     border-radius: 15px;
     overflow: hidden;
+    text-align: left;
+    margin-top: 15px;
 }
 
-.experience-header {
-    background: #000;
-    color: #fff;
+.experience-header, .education-header {
+    background: var(--primary-color);
+    color: var(--tertiary-color);
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
+}
+
+.experience-body, .education-body {
+    color: var(--primary-color);
+    padding: 10px;
 }
 
 .experience-header div {
@@ -401,11 +408,6 @@ header {
     align-self: flex-start;
 }
 
-.experience-body {
-    color: #333;
-    padding: 10px;
-}
-
 .education-section {
     flex: 0 1 400px;
     width: 100%;
@@ -414,24 +416,6 @@ header {
 .education-section ul {
     list-style: none;
     padding: 0;
-}
-
-.education-item {
-    display: block;
-    text-align: left;
-    border: 1px solid #000;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.education-header {
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
 }
 
 .education-header div {
@@ -455,11 +439,6 @@ header {
     margin-left: auto;
     white-space: nowrap;
     align-self: flex-start;
-}
-
-.education-body {
-    padding: 10px;
-    color: #333;
 }
 
 .projects-section {
@@ -628,6 +607,11 @@ span.project-tag {
         color: white;
     }
 
+    .ots-banner a:active {
+        background: white;
+        color: var(--secondary-color);
+    }
+
     .top-button:hover,
     .nav-button a:hover {
         background: var(--button-active-color-fg);
@@ -651,11 +635,6 @@ span.project-tag {
         background: var(--button-active-color-fg);
         color: var(--button-active-color-bg);
     }
-
-    .ots-banner a:active {
-        background: white;
-        color: var(--secondary-color);
-    }
 }
 
 /* Markdown */
@@ -666,6 +645,7 @@ span.project-tag {
 
 .markdown p a {
     text-decoration: underline;
+    color: var(--primary-color);
 }
 
 .markdown p a:before {
