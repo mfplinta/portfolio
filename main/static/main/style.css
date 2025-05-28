@@ -62,6 +62,9 @@ h1, h2, h3, h4, h5, h6 {
     --skill-inactive-color-fg: var(--primary-color);
     --skill-active-color-bg: var(--primary-color);
     --skill-active-color-fg: var(--tertiary-color);
+    --section-header-color-bg: var(--primary-color);
+    --section-header-color-fg: var(--tertiary-color);
+    --section-color-border: var(--primary-color);
 }
 
 body {
@@ -268,7 +271,7 @@ header {
 .header-title {
     font-size: 1.25em;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--quaternary-color);
 }
 
 .filter-desc {
@@ -369,7 +372,7 @@ header {
 
 .experience-item,
 .education-item {
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--section-color-border);
     border-radius: 15px;
     overflow: hidden;
     text-align: left;
@@ -377,8 +380,9 @@ header {
 }
 
 .experience-header, .education-header {
-    background: var(--primary-color);
-    color: var(--tertiary-color);
+    background: var(--section-header-color-bg);
+    color: var(--section-header-color-fg);
+    border-bottom: 1px solid var(--section-color-border);
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -564,7 +568,7 @@ span.project-tag {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: #fff;
+        --primary-color: #eee;
         --secondary-color: #384b8a;
         --tertiary-color: #000;
         --quaternary-color: #aaa;
@@ -572,6 +576,9 @@ span.project-tag {
         --button-active-color-fg: var(--tertiary-color);
         --button-inactive-color-bg: var(--tertiary-color);
         --button-inactive-color-fg: var(--primary-color);
+        --section-header-color-bg: var(--tertiary-color);
+        --section-header-color-fg: var(--primary-color);
+        --section-color-border: var(--primary-color);
     }
 
     .tag-black {
