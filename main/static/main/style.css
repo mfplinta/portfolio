@@ -332,6 +332,7 @@ header {
     align-items: center;
     border: 1px solid var(--skill-inactive-color-fg);
     color: var(--skill-inactive-color-fg);
+    background-color: var(--skill-inactive-color-bg);
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
@@ -503,6 +504,8 @@ a.fill-div {
     margin-bottom: 10px;
     padding: 10px;
     border-bottom: 1px solid var(--primary-color);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .project-title {
@@ -531,14 +534,12 @@ a.fill-div {
 }
 
 .project-tag {
-    background-color: var(--primary-color);
     padding: 0 10px;
     border-radius: 15px;
     z-index: 2;
 }
 
 .project-tag a, span.project-tag {
-    color: var(--tertiary-color);
     font-size: 0.8em;
 }
 
@@ -566,19 +567,25 @@ span.project-tag {
     background-color: rgb(154, 85, 0);
 }
 
+.tag-black a, .tag-blue a, .tag-red a, .tag-orange a {
+    color: var(--tertiary-color);
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --primary-color: #eee;
         --secondary-color: #384b8a;
         --tertiary-color: #111;
         --quaternary-color: #aaa;
+        --quinary-color: #1c1c1c;
         --button-active-color-bg: var(--primary-color);
         --button-active-color-fg: var(--tertiary-color);
-        --button-inactive-color-bg: var(--tertiary-color);
+        --button-inactive-color-bg: var(--quinary-color);
         --button-inactive-color-fg: var(--primary-color);
-        --section-header-color-bg: var(--tertiary-color);
+        --section-header-color-bg: var(--quinary-color);
         --section-header-color-fg: var(--primary-color);
         --section-color-border: var(--primary-color);
+        --skill-inactive-color-bg: var(--quinary-color);
     }
 
     .tag-black {
@@ -590,11 +597,19 @@ span.project-tag {
     }
 
     .tag-red {
-        background-color: #d76b6b;
+        background-color: #c57e7e;
     }
 
     .tag-orange {
         background-color: #e0a170;
+    }
+
+    .tag-blue a {
+        color: var(--primary-color);
+    }
+
+    .project-header {
+        background-color: var(--quinary-color);
     }
 }
 
