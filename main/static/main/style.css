@@ -544,7 +544,7 @@ a.fill-div {
     border-bottom: 1px solid var(--primary-color);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    transition: border-color var(--transition-speed) ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .project-title {
