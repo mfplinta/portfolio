@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 :root {
     --primary-color: #000;
     --secondary-color: #6073b9;
-    --tertiary-color: #fff;
+    --tertiary-color: #f8f8f8;
     --quaternary-color: #444;
     --button-active-color-bg: var(--tertiary-color);
     --button-active-color-fg: var(--primary-color);
