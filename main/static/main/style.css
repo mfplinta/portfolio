@@ -739,3 +739,22 @@ span.project-tag {
 .markdown p a:before {
     content: "↗ ";
 }
+
+/* Intro */
+.intro-section {
+    border: 1px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 10px;
+    margin: 30px 10px 25px;
+    border-radius: 15px;
+    max-width: 500px;
+}
+
+.intro-section h2 {
+    padding: 0;
+}
