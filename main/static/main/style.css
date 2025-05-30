@@ -515,7 +515,7 @@ header {
 .experience-section h2,
 .education-section h2,
 .skills-section h2 {
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 
@@ -750,9 +750,9 @@ span.project-tag {
     text-align: justify;
     text-justify: inter-word;
     padding: 10px;
-    margin: 30px 10px 25px;
+    margin: 25px 10px 25px;
     border-radius: 15px;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .intro-section h2 {
