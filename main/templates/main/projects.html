@@ -39,7 +39,7 @@
                     <img src="
                                 {% if project.image %}{{ thumb.url }}{% else %}{{ placeholder }}{% endif %}"
                          alt="Image of {{ project.title }}" class="project-image"
-                         style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};"/>
+                         style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};">
                 </picture>
                 {{ project.formatted_description|safe }}
             </div>
@@ -47,3 +47,4 @@
         {% endfor %}
     </section>
     {% endblock %}
+</div>
