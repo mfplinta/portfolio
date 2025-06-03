@@ -2,10 +2,13 @@
 {% load static %}
 {% load imagekit %}
 
-{% block title %}{{ "Projects" }}{% endblock %}
-{% block meta-description %}
-    {{ "I'm Matt (Matheus Plinta). A few of the projects I have built along the years." }}{% endblock %}
-
+{% block extra-meta %}
+    <title>Projects - I'm Matt</title>
+    <meta name="description" content="I'm Matt (Matheus Plinta). A few of the projects I have built along the years.">
+    {% if tag %}
+        <meta name="robots" content="noindex">
+    {% endif %}
+{% endblock %}
 {% block body %}
 {% include 'main/header.html' with title='Projects' back_to='/' tag=tag %}
 <div class="content">
