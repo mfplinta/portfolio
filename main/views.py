@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import F
 
-from main.models import Skill, Experience, Education, Project, ProjectTag
+from main.models import Skill, Experience, Education, Project, ProjectTag, BlogArticle
 
 
 def index(request):
@@ -23,5 +23,10 @@ def projects(request, tag=None):
 
 def blog(request):
     return render(request, 'main/blog.html', {
-        'articles': []
+        'articles': BlogArticle.objects.all()
+    })
+
+def blog_article(request, pk=None):
+    return render(request, 'main/blog_article.html', {
+        'article': BlogArticle.objects.get(pk=pk)
     })

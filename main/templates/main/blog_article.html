@@ -1,0 +1,7 @@
+{% extends "main/base.html" %}
+{% block extra-meta %}
+    <title>Blog - I'm Matt</title>
+{% endblock %}
+{% block body %}
+    <iframe src={{ article.iframe_url }} allowfullscreen></iframe>
+{% endblock %}

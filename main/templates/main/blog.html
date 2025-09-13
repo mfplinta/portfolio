@@ -1,7 +1,21 @@
 {% extends "main/base.html" %}
+{% load static %}
 {% block extra-meta %}
     <title>Blog - I'm Matt</title>
 {% endblock %}
 {% block body %}
 {% include 'main/header.html' with title='Blog' back_to='/' tag=tag %}
+<div class="content">
+    <section class="blog-section">
+        {% for article in articles %}
+        <a href="{% url 'blog-article' article.pk %}" target="_blank">
+        <div class="blog-item">
+            <div class="blog-header">
+                <p class="project-title">{{ article.title }}</p>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+    </section>
+</div>
 {% endblock %}

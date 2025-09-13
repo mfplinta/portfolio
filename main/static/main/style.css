@@ -624,6 +624,34 @@ span.project-tag {
     color: var(--tertiary-color);
 }
 
+.blog-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.blog-header {
+    border: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 15px;
+    transition: all var(--transition-speed) ease;
+}
+
+.blog-item {
+    position: relative;
+    margin: 0 50px;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
 [data-theme="dark"] {
     --primary-color: #eee;
     --secondary-color: #384b8a;

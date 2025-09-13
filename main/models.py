@@ -90,4 +90,8 @@ class Project(models.Model):
 
 class BlogArticle(models.Model):
     title = models.CharField(max_length=200)
+    date = models.DateField()
     iframe_url = models.URLField(null=False)
+
+    def __str__(self):
+        return self.title
