@@ -13,6 +13,7 @@ urlpatterns = [
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path("projects/", views.projects, name="projects"),
     path("projects/with-tag/<str:tag>/", views.projects, name="projects-withtag"),
+    path("blog/", views.blog, name="blog")
 ]
 
 #urls.handler500 = lambda req: technical_500_response(req, *sys.exc_info())

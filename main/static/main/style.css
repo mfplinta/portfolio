@@ -79,6 +79,15 @@ h1, h2, h3, h4, h5, h6, p, a, span, li {
     font-family: 'Inter', sans-serif;
 }
 
+iframe {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    border: none;
+}
+
+iframe.div.notion-topbar > div > div:nth-child(4) { display: none !important; }
+
 /* Main */
 .content {
     padding: 30px 0;
@@ -262,15 +271,16 @@ header {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+    width: 100%;
 }
 
 .nav-buttons ul {
     list-style: none;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin-top: 20px;
 }
 
 .nav-button a {

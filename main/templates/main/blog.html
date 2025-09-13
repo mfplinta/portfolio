@@ -1,0 +1,7 @@
+{% extends "main/base.html" %}
+{% block extra-meta %}
+    <title>Blog - I'm Matt</title>
+{% endblock %}
+{% block body %}
+{% include 'main/header.html' with title='Blog' back_to='/' tag=tag %}
+{% endblock %}

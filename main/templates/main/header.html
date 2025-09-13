@@ -9,7 +9,7 @@
 
         function styleHeader(fixed = false) {
             if(content !== null) {
-                content.style.paddingTop = (fixed ? 80{% if title %} + 60{% endif %} : 300) + 'px';
+                content.style.paddingTop = (fixed ? 80{% if title %} + 60{% endif %} : 265 + navButtons.offsetHeight) + 'px';
             }
 
             if(fixed) {
@@ -40,13 +40,14 @@
                 heroName.style.transform = `translate(0, 0)`;
             }
             heroName.style.height = `${4.5 - Math.min(2, scrollY / 50)}rem`;
-            navButtons.style.top = `${Math.max(10, 220 - scrollY)}px`;
+            navButtons.style.top = `${Math.max(10, 240 - scrollY)}px`;
             const navButtonsOpacity = Math.max(0, 2 - Math.max(1, scrollY / 100));
             if (navButtonsOpacity > 0) {
                 navButtons.style.display = 'block';
                 navButtons.style.opacity = navButtonsOpacity;
             } else {
-                navButtons.style.display = 'none';
+                navButtons.style.opacity = 0;
+                navButtons.style.zIndex = -1;
             }
         }
 
@@ -54,6 +55,9 @@
         window.addEventListener('scroll', () => {
             styleHeader();
         });
+        window.addEventListener('resize', () => {
+            styleHeader();
+        })
         {% endif %}
 
         styleHeader({% if not main_page %}true{% endif %});
@@ -80,6 +84,7 @@
         <ul>
             <li class="nav-button"><a href="#">Résumé</a></li>
             <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
+            <li class="nav-button"><a href="{% url 'blog' %}">Blog</a></li>
         </ul>
     </nav>
     {% if title %}

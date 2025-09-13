@@ -20,3 +20,8 @@ def projects(request, tag=None):
         'projects': projects,
         'tag': ProjectTag.objects.get(tag=tag) if tag else None,
     })
+
+def blog(request):
+    return render(request, 'main/blog.html', {
+        'articles': []
+    })
