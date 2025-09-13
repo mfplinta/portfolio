@@ -8,13 +8,13 @@
 <div class="content">
     <section class="blog-section">
         {% for article in articles %}
-        <a href="{% url 'blog-article' article.pk %}" target="_blank">
         <div class="blog-item">
-            <div class="blog-header">
-                <p class="project-title">{{ article.title }}</p>
-            </div>
+            <a href="{% url 'blog-article' article.pk %}" target="_blank">
+                <div class="blog-header">
+                    <p class="project-title">{{ article.title }}</p>
+                </div>
+            </a>
         </div>
-        </a>
         {% endfor %}
     </section>
 </div>
