@@ -3,5 +3,6 @@
     <title>{{ article.title }} - I'm Matt</title>
 {% endblock %}
 {% block body %}
+    {% include 'main/header.html' with title=article.title back_to="/blog/" tag=tag %}
     <iframe src={{ article.iframe_url }} allowfullscreen></iframe>
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load tz %}
 {% block extra-meta %}
     <title>Blog - I'm Matt</title>
 {% endblock %}
@@ -8,13 +9,18 @@
 <div class="content">
     <section class="blog-section">
         {% for article in articles %}
-        <div class="blog-item">
-            <a href="{% url 'blog-article' article.pk %}" target="_blank">
-                <div class="blog-header">
+        <a href="{% url 'blog-article' article.pk %}">
+            <div class="blog-item">
+                    <div class="blog-header">
+                        <p>
+                            {% timezone "America/Denver" %}
+                                {{ article.date|date:"n/d/y" }}
+                            {% endtimezone %}
+                        </p>
+                    </div>
                     <p class="project-title">{{ article.title }}</p>
-                </div>
-            </a>
-        </div>
+            </div>
+        </a>
         {% endfor %}
     </section>
 </div>

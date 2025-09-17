@@ -125,7 +125,7 @@ ul {
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--primary-color);
 }
 
 header {
@@ -324,6 +324,7 @@ header {
 .header-title {
     font-size: 1.25em;
     font-weight: bold;
+    text-align: right;
     color: var(--quaternary-color);
 }
 
@@ -583,23 +584,16 @@ a.fill-div {
     margin-top: 5px;
 }
 
-.project-tag {
-    padding: 0 10px;
+.project-tag, span.project-tag {
+    padding: 5px 10px;
     border-radius: var(--border-radius);
     z-index: 2;
-}
-
-.project-tag a, span.project-tag {
     font-size: 0.8em;
     transition: all var(--transition-speed) ease;
 }
 
 .filter-desc a {
     color: var(--primary-color);
-}
-
-span.project-tag {
-    padding: 5px 10px;
 }
 
 .tag-black {
@@ -630,6 +624,7 @@ span.project-tag {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+    margin: 0 10px;
     gap: 30px;
     width: 100%;
     max-width: 900px;
@@ -640,15 +635,15 @@ span.project-tag {
     margin-bottom: 0;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: baseline;
-    padding: 20px 15px;
     transition: all var(--transition-speed) ease;
 }
 
 .blog-item {
     position: relative;
-    margin: 0 50px;
+    padding: 10px;
     border: 1px solid var(--primary-color);
     border-radius: var(--border-radius);
 }
