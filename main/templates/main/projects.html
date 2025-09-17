@@ -10,44 +10,47 @@
     {% endif %}
 {% endblock %}
 {% block body %}
-{% include 'main/header.html' with title='Projects' back_to='/' tag=tag %}
-<div class="content">
-    <section class="projects-section">
-        {% for project in projects %}
-        <div class="project-item">
-            <div class="project-header">
-                <p class="project-title">{{ project.title }}</p>
-                <p class="project-year">{{ project.date|date:"Y" }}</p>
-                <ul class="project-tags">
-                    {% for tag in project.tags.all %}
-                        <li><a class="project-tag {{ tag.color }}" href="{% url 'projects-withtag' tag.tag %}"
-                                                                   aria-label="Link to {{ tag.name }} tag filter">{{ tag.tag }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="project-body markdown">
-                <picture>
-                    {% static 'main/imgs/placeholder.png' as placeholder %}
-                    {% generateimage 'main:project_thumbnail' source=project.image as thumb %}
-                    {% generateimage 'main:project_thumbnail' source=project.image as thumb2x %}
-                    {% generateimage 'main:project_thumbnail_webp' source=project.image as thumb_webp %}
-                    {% generateimage 'main:project_thumbnail_webp2x' source=project.image as thumb_webp2x %}
-                    <source srcset="
-                            {% if project.image %}{{ thumb_webp.url }} 1x, {{ thumb_webp2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
-                            type="image/webp">
-                    <source srcset="
-                            {% if project.image %}{{ thumb.url }} 1x, {{ thumb2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
-                            type="image/jpeg">
-                    <img src="
+    {% include 'main/header.html' with title='Projects' back_to='/' tag=tag %}
+    <div class="content">
+        <section class="projects-section">
+            {% for project in projects %}
+                <div class="project-item">
+                    <div class="project-header">
+                        <p class="project-title">{{ project.title }}</p>
+                        <p class="project-year">{{ project.date|date:"Y" }}</p>
+                        <ul class="project-tags">
+                            {% for tag in project.tags.all %}
+                                <li><a class="project-tag {{ tag.color }}" href="{% url 'projects-withtag' tag.tag %}"
+                                       aria-label="Link to {{ tag.name }} tag filter"
+                                       rel="nofollow">{{ tag.tag }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="project-body markdown">
+                        <picture>
+                            {% static 'main/imgs/placeholder.png' as placeholder %}
+                            {% generateimage 'main:project_thumbnail' source=project.image as thumb %}
+                            {% generateimage 'main:project_thumbnail' source=project.image as thumb2x %}
+                            {% generateimage 'main:project_thumbnail_webp' source=project.image as thumb_webp %}
+                            {% generateimage 'main:project_thumbnail_webp2x' source=project.image as thumb_webp2x %}
+                            <source srcset="
+
+                                    {% if project.image %}{{ thumb_webp.url }} 1x, {{ thumb_webp2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
+                                    type="image/webp">
+                            <source srcset="
+
+                                    {% if project.image %}{{ thumb.url }} 1x, {{ thumb2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
+                                    type="image/jpeg">
+                            <img src="
                                 {% if project.image %}{{ thumb.url }}{% else %}{{ placeholder }}{% endif %}"
-                         alt="Image of {{ project.title }}" class="project-image"
-                         style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};">
-                </picture>
-                {{ project.formatted_description|safe }}
-            </div>
-        </div>
-        {% endfor %}
-    </section>
-</div>
-    {% endblock %}
+                                 alt="Image of {{ project.title }}" class="project-image"
+                                 style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};">
+                        </picture>
+                        {{ project.formatted_description|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}
