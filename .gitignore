@@ -171,3 +171,7 @@ cython_debug/
 /main/migrations/
 /media/
 /staticfiles/
+
+# Obsidian files
+/obsidian/.obsidian
+/obsidian/.trash
