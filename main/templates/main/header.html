@@ -84,14 +84,14 @@
         <ul>
             <li class="nav-button"><a href="#">Résumé</a></li>
             <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
-            <li class="nav-button"><a href="{% url 'blog' %}">Blog</a></li>
+            <li class="nav-button"><a href="/blog/">Blog</a></li>
         </ul>
     </nav>
     {% if title %}
         <div class="nav-title">
             <a href="{{ back_to }}" class="back-link">&lt; Back</a>
         {% if tag %}
-            <span class="filter-desc"><a href="/projects/">Filtering by tag: <span class="project-tag {{ tag.color }}">{{ tag.tag }}</span></a></span>
+            <span class="filter-desc"><a href="{% url 'projects' %}">Filtering by tag: <span class="project-tag {{ tag.color }}">{{ tag.tag }}</span></a></span>
         {% else %}
             <h1 class="header-title">{{ title }}</h1>
         {% endif %}
