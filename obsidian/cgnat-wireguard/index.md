@@ -2,7 +2,7 @@
 title: How to overcome CG-NAT for free with Oracle Cloud and NixOS
 ---
 ### Table of contents
-- [[index|Introduction]]
+- [[cgnat-wireguard/index|Introduction]]
 - [[cloud-setup|Part 1. Cloud Setup]]
 
 In today’s day and age, there aren’t many ISPs that still provide public IPs for its users. This can be a challenge to fellow homelab enthusiasts that seek to host services in their own hardware.
