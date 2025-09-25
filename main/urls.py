@@ -15,7 +15,7 @@ urlpatterns = [
     path("projects/with-tag/<str:tag>/", views.projects, name="projects-withtag")
 ]
 
-#urls.handler500 = lambda req: technical_500_response(req, *sys.exc_info())
+urls.handler500 = lambda req: technical_500_response(req, *sys.exc_info())
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
