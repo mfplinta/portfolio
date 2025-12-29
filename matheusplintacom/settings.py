@@ -135,11 +135,11 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "matheusplinta.com", "www.matheusplinta.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "www.plinta.dev", "plinta.dev"]
 if DEBUG:
     ALLOWED_HOSTS += ['*']
 
-CSRF_TRUSTED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
-CSRF_ALLOWED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
-CORS_ORIGINS_WHITELIST = ["https://matheusplinta.com", "https://www.matheusplinta.com"]
+CSRF_TRUSTED_ORIGINS = ["https://plinta.dev", "https://www.plinta.dev"]
+CSRF_ALLOWED_ORIGINS = ["https://plinta.dev", "https://www.plinta.dev"]
+CORS_ORIGINS_WHITELIST = ["https://plinta.dev", "https://www.plinta.dev"]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
