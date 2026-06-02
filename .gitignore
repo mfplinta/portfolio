@@ -171,6 +171,7 @@ cython_debug/
 /main/migrations/
 /media/
 /staticfiles/
+.devenv
 
 # Obsidian files
 /obsidian/.obsidian

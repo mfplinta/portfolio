@@ -82,7 +82,7 @@
     </div>
     <nav class="nav-buttons">
         <ul>
-            <li class="nav-button"><a href="#">Résumé</a></li>
+            <li class="nav-button"><a {% if resume_url %}href="{{ resume_url }}" target="_blank" rel="noopener"{% else %}href="#"{% endif %}>Résumé</a></li>
             <li class="nav-button"><a href="{% url 'projects' %}">Projects</a></li>
             <li class="nav-button"><a href="/blog/">Blog</a></li>
         </ul>

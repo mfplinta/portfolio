@@ -16,18 +16,20 @@
             {% for project in projects %}
                 <div class="project-item">
                     <div class="project-header">
-                        <p class="project-title">{{ project.title }}</p>
+                        <p class="project-title" title="{{ project.title }}">{{ project.title }}</p>
                         <p class="project-year">{{ project.date|date:"Y" }}</p>
-                        <ul class="project-tags">
-                            {% for tag in project.tags.all %}
-                                <li><a class="project-tag {{ tag.color }}" href="{% url 'projects-withtag' tag.tag %}"
-                                       aria-label="Link to {{ tag.name }} tag filter"
-                                       rel="nofollow">{{ tag.tag }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="project-tags-strip">
+                            <ul class="project-tags">
+                                {% for tag in project.tags.all %}
+                                    <li><a class="project-tag {{ tag.color }}" href="{% url 'projects-withtag' tag.tag %}"
+                                           aria-label="Link to {{ tag.name }} tag filter"
+                                           rel="nofollow">{{ tag.tag }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                    <div class="project-body markdown">
+                    <div class="project-body">
                         <picture>
                             {% static 'main/imgs/placeholder.png' as placeholder %}
                             {% generateimage 'main:project_thumbnail' source=project.image as thumb %}
@@ -47,10 +49,116 @@
                                  alt="Image of {{ project.title }}" class="project-image"
                                  style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};">
                         </picture>
-                        {{ project.formatted_description|safe }}
+                        <div class="project-description-frame">
+                            <div class="project-description markdown" tabindex="0">
+                                {{ project.formatted_description|safe }}
+                            </div>
+                        </div>
+                        {% if project.description_buttons %}
+                            <div class="project-actions">
+                                {% for button in project.description_buttons %}
+                                    <a href="{{ button.url }}" class="project-action-button" target="_blank" rel="noopener noreferrer">{{ button.label }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
         </section>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const frames = document.querySelectorAll(".project-description-frame");
+            const tagStrips = document.querySelectorAll(".project-tags-strip");
+
+            function updateScrollHint(frame) {
+                const description = frame.querySelector(".project-description");
+                const hasMore = description.scrollHeight > description.clientHeight + 1;
+                const isAtEnd = description.scrollTop + description.clientHeight >= description.scrollHeight - 1;
+
+                frame.classList.toggle("has-more", hasMore);
+                frame.classList.toggle("is-at-end", isAtEnd);
+            }
+
+            function updateTagOverflow(strip) {
+                const tags = strip.querySelector(".project-tags");
+                const hasMoreTags = tags.scrollWidth > tags.clientWidth + 1;
+                const tagsAtStart = tags.scrollLeft <= 1;
+                const tagsAtEnd = tags.scrollLeft + tags.clientWidth >= tags.scrollWidth - 1;
+
+                strip.classList.toggle("has-more-tags", hasMoreTags);
+                strip.classList.toggle("tags-at-start", tagsAtStart);
+                strip.classList.toggle("tags-at-end", tagsAtEnd);
+            }
+
+            frames.forEach(function (frame) {
+                const description = frame.querySelector(".project-description");
+
+                updateScrollHint(frame);
+                description.addEventListener("scroll", function () {
+                    updateScrollHint(frame);
+                }, { passive: true });
+                description.addEventListener("touchstart", function () {
+                    frame.classList.add("is-touching");
+                }, { passive: true });
+                description.addEventListener("touchend", function () {
+                    frame.classList.remove("is-touching");
+                }, { passive: true });
+                description.addEventListener("touchcancel", function () {
+                    frame.classList.remove("is-touching");
+                }, { passive: true });
+            });
+
+            tagStrips.forEach(function (strip) {
+                const tags = strip.querySelector(".project-tags");
+
+                updateTagOverflow(strip);
+                tags.addEventListener("scroll", function () {
+                    updateTagOverflow(strip);
+                }, { passive: true });
+                tags.addEventListener("wheel", function (event) {
+                    if (tags.scrollWidth <= tags.clientWidth) {
+                        return;
+                    }
+
+                    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                    if (delta === 0) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    tags.scrollLeft += delta;
+                    updateTagOverflow(strip);
+                }, { passive: false });
+            });
+
+            if ("ResizeObserver" in window) {
+                const observer = new ResizeObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.target.classList.contains("project-description-frame")) {
+                            updateScrollHint(entry.target);
+                            return;
+                        }
+
+                        if (entry.target.classList.contains("project-tags-strip")) {
+                            updateTagOverflow(entry.target);
+                        }
+                    });
+                });
+
+                frames.forEach(function (frame) {
+                    observer.observe(frame);
+                });
+
+                tagStrips.forEach(function (strip) {
+                    observer.observe(strip);
+                });
+            }
+
+            window.addEventListener("load", function () {
+                frames.forEach(updateScrollHint);
+                tagStrips.forEach(updateTagOverflow);
+            });
+        });
+    </script>
 {% endblock %}

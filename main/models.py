@@ -3,6 +3,7 @@ from django.db.models import ImageField
 from imagekit.models import ImageSpecField
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
+import re
 
 
 class ProjectTag(models.Model):
@@ -17,6 +18,28 @@ class ProjectTag(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.tag})'
+
+
+class SiteSettings(models.Model):
+    resume = models.FileField(
+        upload_to='files/',
+        null=True,
+        blank=True,
+        help_text='File opened by the Resume button in the site header.',
+    )
+
+    @classmethod
+    def get_current(cls):
+        settings, _ = cls.objects.get_or_create(pk=1)
+        return settings
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Site settings'
+
 
 class Experience(models.Model):
     title = models.CharField(max_length=200)
@@ -44,6 +67,7 @@ class Skill(models.Model):
         ('icon-ubuntu', 'Ubuntu'),
         ('icon-github-alt', 'GitHub'),
         ('icon-aws', 'AWS'),
+        ('icon-robot', 'AI')
     ))
     tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -81,9 +105,30 @@ class Project(models.Model):
     image_thumbnail = ImageSpecField(source='image', format='webp', options={'quality': 60})
     image_webp = ImageSpecField(source='image', format='webp', options={'quality': 60})
 
+    BUTTON_LINK_PATTERN = re.compile(r'\{\s*\[([^\]]+)\]\(([^)]+)\)\s*\}')
+
+    def _extract_button_links(self):
+        buttons = []
+
+        def replace_button(match):
+            buttons.append({
+                'label': match.group(1),
+                'url': match.group(2),
+            })
+            return ''
+
+        description = self.BUTTON_LINK_PATTERN.sub(replace_button, self.description)
+        return description.strip(), buttons
+
     @property
     def formatted_description(self):
-        return markdownify(self.description)
+        description, _ = self._extract_button_links()
+        return markdownify(description)
+
+    @property
+    def description_buttons(self):
+        _, buttons = self._extract_button_links()
+        return buttons
 
     def __str__(self):
         return self.title

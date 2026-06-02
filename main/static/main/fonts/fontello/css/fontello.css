@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?73479692#fontello') format('svg');
+    src: url('../font/fontello.svg?52730009#fontello') format('svg');
   }
 }
 */
@@ -54,6 +54,7 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
+.icon-robot:before { content: '\e80f'; } /* '' */
 .icon-byu:before { content: '\e9ca'; } /* '' */
 .icon-colts:before { content: '\e9cb'; } /* '' */
 .icon-github:before { content: '\f09b'; } /* '' */
