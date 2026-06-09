@@ -101,9 +101,6 @@ class Project(models.Model):
     description = MarkdownxField()
     git_url = models.URLField(null=True, blank=True)
     tags = models.ManyToManyField(ProjectTag)
-    image = ImageField(upload_to='images/', null=True, blank=True)
-    image_thumbnail = ImageSpecField(source='image', format='webp', options={'quality': 60})
-    image_webp = ImageSpecField(source='image', format='webp', options={'quality': 60})
 
     BUTTON_LINK_PATTERN = re.compile(r'\{\s*\[([^\]]+)\]\(([^)]+)\)\s*\}')
 
@@ -132,3 +129,18 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    image = ImageField(upload_to='images/projects/')
+    alt_text = models.CharField(max_length=200, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    image_thumbnail = ImageSpecField(source='image', format='webp', options={'quality': 60})
+    image_webp = ImageSpecField(source='image', format='webp', options={'quality': 60})
+
+    class Meta:
+        ordering = ('order', 'id')
+
+    def __str__(self):
+        return f'{self.project.title} image {self.order + 1}'

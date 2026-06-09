@@ -20,9 +20,9 @@ def index(request):
 
 def projects(request, tag=None):
     if tag:
-        projects = Project.objects.filter(tags__tag=tag).order_by(F('date').desc())
+        projects = Project.objects.filter(tags__tag=tag).prefetch_related('images', 'tags').order_by(F('date').desc())
     else:
-        projects = Project.objects.all().order_by(F('date').desc())
+        projects = Project.objects.prefetch_related('images', 'tags').all().order_by(F('date').desc())
     return render(request, 'main/projects.html', {
         'projects': projects,
         'tag': ProjectTag.objects.get(tag=tag) if tag else None,

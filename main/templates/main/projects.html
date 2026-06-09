@@ -13,6 +13,7 @@
     {% include 'main/header.html' with title='Projects' back_to='/' tag=tag %}
     <div class="content">
         <section class="projects-section">
+            {% static 'main/imgs/placeholder.png' as placeholder %}
             {% for project in projects %}
                 <div class="project-item">
                     <div class="project-header">
@@ -30,25 +31,34 @@
                         </div>
                     </div>
                     <div class="project-body">
-                        <picture>
-                            {% static 'main/imgs/placeholder.png' as placeholder %}
-                            {% generateimage 'main:project_thumbnail' source=project.image as thumb %}
-                            {% generateimage 'main:project_thumbnail' source=project.image as thumb2x %}
-                            {% generateimage 'main:project_thumbnail_webp' source=project.image as thumb_webp %}
-                            {% generateimage 'main:project_thumbnail_webp2x' source=project.image as thumb_webp2x %}
-                            <source srcset="
-
-                                    {% if project.image %}{{ thumb_webp.url }} 1x, {{ thumb_webp2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
-                                    type="image/webp">
-                            <source srcset="
-
-                                    {% if project.image %}{{ thumb.url }} 1x, {{ thumb2x.url }} 2x{% else %}{{ placeholder }}{% endif %}"
-                                    type="image/jpeg">
-                            <img src="
-                                {% if project.image %}{{ thumb.url }}{% else %}{{ placeholder }}{% endif %}"
-                                 alt="Image of {{ project.title }}" class="project-image"
-                                 style="object-fit: {% if project.image %}cover{% else %}contain{% endif %};">
-                        </picture>
+                        <div class="project-carousel" data-project-carousel data-project-title="{{ project.title }}">
+                            <div class="project-carousel-track">
+                                {% for project_image in project.images.all %}
+                                    {% generateimage 'main:project_thumbnail' source=project_image.image as thumb %}
+                                    {% generateimage 'main:project_thumbnail2x' source=project_image.image as thumb2x %}
+                                    {% generateimage 'main:project_thumbnail_webp' source=project_image.image as thumb_webp %}
+                                    {% generateimage 'main:project_thumbnail_webp2x' source=project_image.image as thumb_webp2x %}
+                                    <button class="project-carousel-slide{% if forloop.first %} is-active{% endif %}" type="button"
+                                            data-carousel-slide data-slide-index="{{ forloop.counter0 }}"
+                                            data-full-src="{{ project_image.image.url }}"
+                                            data-alt="{{ project_image.alt_text|default:project.title }}"
+                                            aria-label="Open image {{ forloop.counter }} for {{ project.title }}">
+                                        <picture>
+                                            <source srcset="{{ thumb_webp.url }} 1x, {{ thumb_webp2x.url }} 2x" type="image/webp">
+                                            <source srcset="{{ thumb.url }} 1x, {{ thumb2x.url }} 2x" type="image/jpeg">
+                                            <img src="{{ thumb.url }}" alt="{{ project_image.alt_text|default:project.title }}" class="project-image">
+                                        </picture>
+                                    </button>
+                                {% empty %}
+                                    <button class="project-carousel-slide is-active" type="button" disabled aria-label="No image for {{ project.title }}">
+                                        <img src="{{ placeholder }}" alt="No image available for {{ project.title }}" class="project-image project-image-placeholder">
+                                    </button>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control carousel-control-prev" type="button" data-carousel-prev aria-label="Previous image">&lsaquo;</button>
+                            <button class="carousel-control carousel-control-next" type="button" data-carousel-next aria-label="Next image">&rsaquo;</button>
+                            <div class="carousel-dots" data-carousel-dots aria-label="Project image carousel controls"></div>
+                        </div>
                         <div class="project-description-frame">
                             <div class="project-description markdown" tabindex="0">
                                 {{ project.formatted_description|safe }}
@@ -66,10 +76,29 @@
             {% endfor %}
         </section>
     </div>
+    <div class="carousel-overlay" data-carousel-overlay aria-hidden="true">
+        <div class="carousel-overlay-backdrop" data-overlay-close></div>
+        <div class="carousel-overlay-panel" role="dialog" aria-modal="true" aria-label="Project image gallery">
+            <button class="carousel-overlay-close" type="button" data-overlay-close aria-label="Close gallery">&times;</button>
+            <button class="carousel-overlay-control carousel-overlay-prev" type="button" data-overlay-prev aria-label="Previous image">&lsaquo;</button>
+            <figure class="carousel-overlay-figure">
+                <img class="carousel-overlay-image" src="" alt="" data-overlay-image>
+                <figcaption class="carousel-overlay-caption" data-overlay-caption></figcaption>
+            </figure>
+            <button class="carousel-overlay-control carousel-overlay-next" type="button" data-overlay-next aria-label="Next image">&rsaquo;</button>
+        </div>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const frames = document.querySelectorAll(".project-description-frame");
             const tagStrips = document.querySelectorAll(".project-tags-strip");
+            const carousels = document.querySelectorAll("[data-project-carousel]");
+            const overlay = document.querySelector("[data-carousel-overlay]");
+            const overlayImage = overlay.querySelector("[data-overlay-image]");
+            const overlayCaption = overlay.querySelector("[data-overlay-caption]");
+            let overlaySlides = [];
+            let overlayIndex = 0;
+            let lastFocusedElement = null;
 
             function updateScrollHint(frame) {
                 const description = frame.querySelector(".project-description");
@@ -89,6 +118,88 @@
                 strip.classList.toggle("has-more-tags", hasMoreTags);
                 strip.classList.toggle("tags-at-start", tagsAtStart);
                 strip.classList.toggle("tags-at-end", tagsAtEnd);
+            }
+
+            function setCarouselIndex(carousel, nextIndex) {
+                const slides = Array.from(carousel.querySelectorAll("[data-carousel-slide]:not([disabled])"));
+                const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
+                if (!slides.length) {
+                    return;
+                }
+
+                const index = (nextIndex + slides.length) % slides.length;
+                carousel.dataset.carouselIndex = index;
+                slides.forEach(function (slide, slideIndex) {
+                    const isActive = slideIndex === index;
+                    slide.classList.toggle("is-active", isActive);
+                    slide.setAttribute("aria-hidden", String(!isActive));
+                });
+                dots.forEach(function (dot, dotIndex) {
+                    dot.classList.toggle("is-active", dotIndex === index);
+                    dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
+                });
+            }
+
+            function wheelDirection(event) {
+                const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                if (Math.abs(delta) < 4) {
+                    return 0;
+                }
+                return delta > 0 ? 1 : -1;
+            }
+
+            function shouldHandleWheel(target, delay) {
+                const now = Date.now();
+                const lastWheelAt = Number(target.dataset.lastWheelAt || 0);
+                if (now - lastWheelAt < delay) {
+                    return false;
+                }
+
+                target.dataset.lastWheelAt = String(now);
+                return true;
+            }
+
+            function openOverlay(slides, index) {
+                overlaySlides = slides;
+                overlayIndex = index;
+                lastFocusedElement = document.activeElement;
+                overlay.classList.add("is-open");
+                overlay.setAttribute("aria-hidden", "false");
+                document.body.classList.add("has-carousel-overlay");
+                updateOverlay();
+                overlay.querySelector("[data-overlay-close]").focus();
+            }
+
+            function closeOverlay() {
+                overlay.classList.remove("is-open");
+                overlay.setAttribute("aria-hidden", "true");
+                document.body.classList.remove("has-carousel-overlay");
+                overlayImage.removeAttribute("src");
+                overlayImage.alt = "";
+                if (lastFocusedElement) {
+                    lastFocusedElement.focus();
+                }
+            }
+
+            function updateOverlay() {
+                if (!overlaySlides.length) {
+                    return;
+                }
+
+                const slide = overlaySlides[overlayIndex];
+                overlayImage.src = slide.fullSrc;
+                overlayImage.alt = slide.alt;
+                overlayCaption.textContent = slide.caption;
+                overlay.classList.toggle("is-single-slide", overlaySlides.length <= 1);
+            }
+
+            function moveOverlay(direction) {
+                if (!overlaySlides.length) {
+                    return;
+                }
+
+                overlayIndex = (overlayIndex + direction + overlaySlides.length) % overlaySlides.length;
+                updateOverlay();
             }
 
             frames.forEach(function (frame) {
@@ -130,6 +241,103 @@
                     tags.scrollLeft += delta;
                     updateTagOverflow(strip);
                 }, { passive: false });
+            });
+
+            carousels.forEach(function (carousel) {
+                const slides = Array.from(carousel.querySelectorAll("[data-carousel-slide]:not([disabled])"));
+                const dots = carousel.querySelector("[data-carousel-dots]");
+                const prev = carousel.querySelector("[data-carousel-prev]");
+                const next = carousel.querySelector("[data-carousel-next]");
+
+                if (slides.length <= 1) {
+                    carousel.classList.add("is-single-slide");
+                }
+
+                slides.forEach(function (slide, index) {
+                    const dot = document.createElement("button");
+                    dot.type = "button";
+                    dot.className = "carousel-dot";
+                    dot.dataset.carouselDot = String(index);
+                    dot.setAttribute("aria-label", "Show image " + (index + 1));
+                    dot.addEventListener("click", function () {
+                        setCarouselIndex(carousel, index);
+                    });
+                    dots.appendChild(dot);
+
+                    slide.addEventListener("click", function () {
+                        slide.blur();
+                        const overlayData = slides.map(function (item, itemIndex) {
+                            return {
+                                fullSrc: item.dataset.fullSrc,
+                                alt: item.dataset.alt,
+                                caption: carousel.dataset.projectTitle + " (" + (itemIndex + 1) + " of " + slides.length + ")"
+                            };
+                        });
+                        openOverlay(overlayData, index);
+                    });
+                });
+
+                prev.addEventListener("click", function () {
+                    setCarouselIndex(carousel, Number(carousel.dataset.carouselIndex || 0) - 1);
+                });
+                next.addEventListener("click", function () {
+                    setCarouselIndex(carousel, Number(carousel.dataset.carouselIndex || 0) + 1);
+                });
+                carousel.addEventListener("wheel", function (event) {
+                    if (slides.length <= 1) {
+                        return;
+                    }
+
+                    const direction = wheelDirection(event);
+                    if (!direction) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    if (shouldHandleWheel(carousel, 220)) {
+                        setCarouselIndex(carousel, Number(carousel.dataset.carouselIndex || 0) + direction);
+                    }
+                }, { passive: false });
+                setCarouselIndex(carousel, 0);
+            });
+
+            overlay.querySelectorAll("[data-overlay-close]").forEach(function (closeButton) {
+                closeButton.addEventListener("click", closeOverlay);
+            });
+            overlay.querySelector("[data-overlay-prev]").addEventListener("click", function () {
+                moveOverlay(-1);
+            });
+            overlay.querySelector("[data-overlay-next]").addEventListener("click", function () {
+                moveOverlay(1);
+            });
+            overlay.addEventListener("wheel", function (event) {
+                if (!overlay.classList.contains("is-open") || overlaySlides.length <= 1) {
+                    return;
+                }
+
+                const direction = wheelDirection(event);
+                if (!direction) {
+                    return;
+                }
+
+                event.preventDefault();
+                if (shouldHandleWheel(overlay, 220)) {
+                    moveOverlay(direction);
+                }
+            }, { passive: false });
+
+            document.addEventListener("keydown", function (event) {
+                if (!overlay.classList.contains("is-open")) {
+                    return;
+                }
+
+                if (event.key === "Escape") {
+                    closeOverlay();
+                } else if (event.key === "ArrowLeft") {
+                    moveOverlay(-1);
+                } else if (event.key === "ArrowRight") {
+                    moveOverlay(1);
+                }
             });
 
             if ("ResizeObserver" in window) {

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from markdownx.admin import MarkdownxModelAdmin
 
-from .models import Education, Experience, Project, ProjectTag, SiteSettings, Skill
+from .models import Education, Experience, Project, ProjectImage, ProjectTag, SiteSettings, Skill
 
 
 @admin.register(SiteSettings)
@@ -17,4 +17,14 @@ admin.site.register(Experience, MarkdownxModelAdmin)
 admin.site.register(ProjectTag)
 admin.site.register(Skill)
 admin.site.register(Education, MarkdownxModelAdmin)
-admin.site.register(Project, MarkdownxModelAdmin)
+
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    extra = 1
+    fields = ('image', 'alt_text', 'order')
+    ordering = ('order', 'id')
+
+
+@admin.register(Project)
+class ProjectAdmin(MarkdownxModelAdmin):
+    inlines = (ProjectImageInline,)
