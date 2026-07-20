@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
 import sys
+from pathlib import Path
 
 from django.conf.global_settings import STORAGES
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +24,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-^uod8w=_=k5a(92q63me4vusfm$x(+t!f9n30hwq@mgn_rx_2x')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 if "DJANGO_DEBUG" in os.environ:
     DEBUG = os.environ["DJANGO_DEBUG"].lower() == "true"
 else:
     DEBUG = "runserver" in sys.argv
+
+# Development gets a disposable key; production must provide one.
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = "django-insecure-development-only"
+    else:
+        raise ImproperlyConfigured("SECRET_KEY must be set when DJANGO_DEBUG is false")
+
+
+def environment_list(name, default):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return [item.strip() for item in value.split(",") if item.strip()]
 
 # Application definition
 
@@ -103,7 +116,7 @@ WSGI_APPLICATION = 'matheusplintacom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': Path(os.environ.get("DJANGO_DATA_DIR", BASE_DIR)) / 'db.sqlite3',
     }
 }
 
@@ -142,22 +155,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = Path(os.environ.get("DJANGO_STATIC_ROOT", BASE_DIR / "staticfiles"))
 STATIC_URL = "/static/"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = Path(os.environ.get("DJANGO_DATA_DIR", BASE_DIR)) / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "matheusplinta.com", "www.matheusplinta.com", "plinta.dev", "www.plinta.dev"]
-if DEBUG:
-    ALLOWED_HOSTS += ['*']
-
-CSRF_TRUSTED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com", "https://plinta.dev", "https://www.plinta.dev"]
-CSRF_ALLOWED_ORIGINS = ["https://matheusplinta.com", "https://www.matheusplinta.com", "https://plinta.dev", "https://www.plinta.dev"]
-CORS_ORIGINS_WHITELIST = ["https://matheusplinta.com", "https://www.matheusplinta.com", "https://plinta.dev", "https://www.plinta.dev"]
+ALLOWED_HOSTS = environment_list(
+    "DJANGO_ALLOWED_HOSTS",
+    ["localhost", "127.0.0.1"] if DEBUG else [],
+)
+CSRF_TRUSTED_ORIGINS = environment_list("DJANGO_CSRF_TRUSTED_ORIGINS", [])
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = "DENY"
+
+# Other plinta.dev subdomains are separate services, so neither HSTS scope nor
+# browser preload policy belongs to this application.
+SILENCED_SYSTEM_CHECKS = ["security.W005", "security.W021"]
